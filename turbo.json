@@ -1,0 +1,46 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env.*"],
+  "globalEnv": ["DATABASE_URL", "REDIS_URL", "NODE_ENV", "PORT", "LOG_LEVEL"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "build/**", "src-tauri/target/**"],
+      "cache": true
+    },
+    "dev": {
+      "cache": false
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "format:check": {
+      "outputs": [],
+      "cache": false
+    },
+    "db:generate": {
+      "outputs": [],
+      "cache": false
+    },
+    "db:migrate:dev": {
+      "outputs": [],
+      "cache": false
+    },
+    "db:migrate:deploy": {
+      "outputs": [],
+      "cache": false
+    }
+  }
+}

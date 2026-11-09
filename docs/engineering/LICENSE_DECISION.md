@@ -3,6 +3,7 @@
 The product direction is open-source core, but the exact legal license has not been selected.
 
 Maintainers must explicitly decide:
+
 - Application source license.
 - Documentation license.
 - Design, icon, font and other asset licenses.

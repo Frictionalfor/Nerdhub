@@ -7,6 +7,7 @@ Deliver a dependable desktop-first NerdHub experience where a member can create 
 ## P0 requirements
 
 ### Identity
+
 - Register/login with email and password.
 - Verify email and reset password using expiring single-use tokens.
 - GitHub and Google OAuth/OIDC adapters.
@@ -15,18 +16,21 @@ Deliver a dependable desktop-first NerdHub experience where a member can create 
 - Server-side authorization.
 
 ### Onboarding and profile
+
 - Set display name and handle.
 - Select interests; allow skipping and resuming.
 - Edit avatar, banner, bio, interests and external links.
 - Keep private account data private.
 
 ### Topics and feed
+
 - Hierarchical topics.
 - Follow/unfollow topics.
 - Following and Latest feed modes.
 - Search topics, users and content.
 
 ### Community
+
 - Create discussion, question and idea.
 - Comment, react, bookmark.
 - Edit/delete own content under documented rules.
@@ -34,18 +38,21 @@ Deliver a dependable desktop-first NerdHub experience where a member can create 
 - Moderator review and audit trail baseline.
 
 ### Publishing
+
 - Create drafts and publish articles.
 - Preview safely rendered Markdown.
 - Edit with revision history.
 - Attribute sources and display author information.
 
 ### Progression
+
 - Backend-defined XP events.
 - Transactional, idempotent append-only ledger.
 - Basic achievements and progress summary.
 - No client-side grant or arbitrary amount endpoint.
 
 ### Reliability and privacy
+
 - Useful loading, empty, error and offline states.
 - In-app notifications may be staged to M5 if necessary.
 - Export and deletion request path must be designed before public launch.

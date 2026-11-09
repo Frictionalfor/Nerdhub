@@ -1,0 +1,8 @@
+# Machine-generated / dependency artifacts — not hand-formatted.
+pnpm-lock.yaml
+node_modules/
+**/dist/
+**/build/
+**/coverage/
+**/.turbo/
+apps/desktop/src-tauri/target/

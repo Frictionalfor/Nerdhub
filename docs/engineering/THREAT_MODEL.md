@@ -22,20 +22,20 @@
 
 ## Threats and mitigations
 
-| Threat | Mitigation |
-|---|---|
-| Account takeover | Secure password hashing, rate limits, verification, recovery controls, session revocation, MFA later |
-| OAuth account confusion | State, PKCE, nonce, strict callback validation, explicit account linking |
-| Broken object authorization | Server-side ownership checks and negative authorization tests |
-| XP/currency fraud | Server-only policy, append-only ledger, transactions, idempotency |
-| Stored XSS | Safe Markdown renderer, sanitization, restrictive link handling and CSP where applicable |
-| Malicious uploads | Size/type checks, generated object keys, private storage, scanning strategy |
-| SSRF via user URLs | Avoid server-side fetching by default; strict allowlists and egress controls if fetching is added |
-| Spam and abuse | Rate limits, reports, blocks, moderation workflow and anti-automation controls |
-| Secret leakage | Secret manager/environment injection, redaction, scanning, no secrets in renderer |
-| Compromised desktop capability | Least-privilege Tauri permissions and narrow IPC commands |
-| Queue replay | Idempotent job handlers and unique operation identifiers |
-| Admin misuse | Least privilege, audit logs, separation of duties and review |
+| Threat                         | Mitigation                                                                                           |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Account takeover               | Secure password hashing, rate limits, verification, recovery controls, session revocation, MFA later |
+| OAuth account confusion        | State, PKCE, nonce, strict callback validation, explicit account linking                             |
+| Broken object authorization    | Server-side ownership checks and negative authorization tests                                        |
+| XP/currency fraud              | Server-only policy, append-only ledger, transactions, idempotency                                    |
+| Stored XSS                     | Safe Markdown renderer, sanitization, restrictive link handling and CSP where applicable             |
+| Malicious uploads              | Size/type checks, generated object keys, private storage, scanning strategy                          |
+| SSRF via user URLs             | Avoid server-side fetching by default; strict allowlists and egress controls if fetching is added    |
+| Spam and abuse                 | Rate limits, reports, blocks, moderation workflow and anti-automation controls                       |
+| Secret leakage                 | Secret manager/environment injection, redaction, scanning, no secrets in renderer                    |
+| Compromised desktop capability | Least-privilege Tauri permissions and narrow IPC commands                                            |
+| Queue replay                   | Idempotent job handlers and unique operation identifiers                                             |
+| Admin misuse                   | Least privilege, audit logs, separation of duties and review                                         |
 
 ## Security review triggers
 

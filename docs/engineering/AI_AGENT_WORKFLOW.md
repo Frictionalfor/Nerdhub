@@ -16,12 +16,12 @@ If an agent instruction conflicts with an accepted ADR or `AGENTS.md`, follow th
 
 ## Recommended division of labor
 
-| Tool | Best-fit role | Guardrail |
-|---|---|---|
-| Codex | Architecture review, task planning, bounded implementation, code review and debugging | Give one issue and explicit files/scope; require tests and diff review |
-| Kilo | Primary implementation agent for scoped features and repo tasks | One active task owner; use repository rules and inspect changes |
-| Antigravity (Agy) | Implementation, multi-file workflows and UI/product iteration | Do not concurrently edit the same files as Kilo/Codex |
-| GitHub Copilot | Inline completion, small refactors, explanations and test suggestions | Human reviews every suggestion; do not treat autocomplete as an independent reviewer |
+| Tool              | Best-fit role                                                                         | Guardrail                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Codex             | Architecture review, task planning, bounded implementation, code review and debugging | Give one issue and explicit files/scope; require tests and diff review               |
+| Kilo              | Primary implementation agent for scoped features and repo tasks                       | One active task owner; use repository rules and inspect changes                      |
+| Antigravity (Agy) | Implementation, multi-file workflows and UI/product iteration                         | Do not concurrently edit the same files as Kilo/Codex                                |
+| GitHub Copilot    | Inline completion, small refactors, explanations and test suggestions                 | Human reviews every suggestion; do not treat autocomplete as an independent reviewer |
 
 These are workflow recommendations, not claims that one tool is technically incapable of other tasks.
 
@@ -39,6 +39,7 @@ These are workflow recommendations, not claims that one tool is technically inca
 ## Parallel work
 
 Parallelize only independent tasks with non-overlapping files and clear interfaces. Examples:
+
 - Agent A: desktop UI component.
 - Agent B: API module with agreed contract.
 - Human: integration and review.
@@ -89,6 +90,7 @@ If you find no issue, state the limits of your review and what you actually insp
 ## Security-sensitive work
 
 Authentication, authorization, OAuth, migrations, moderation, upload handling, account deletion and XP/currency ledgers require:
+
 - explicit human task approval,
 - tests for both allowed and denied paths,
 - independent review,

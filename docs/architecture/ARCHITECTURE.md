@@ -19,17 +19,17 @@ flowchart LR
 
 ## Technology decisions
 
-| Layer | Choice | Rationale |
-|---|---|---|
-| Desktop shell | Tauri 2 | Native desktop packaging with a web UI |
-| UI | React + TypeScript + Vite | Mature ecosystem and reusable UI |
-| Backend | NestJS | Structured modular Node backend |
-| Database | PostgreSQL | Relational integrity and strong query support |
-| ORM/migrations | Prisma | Typed access and migration workflow |
-| Cache/queue | Redis + BullMQ | Background jobs and transient coordination |
-| API | REST + OpenAPI 3.1 | Clear client/server boundary |
-| Storage | S3-compatible | Portable object storage |
-| Monorepo | pnpm + Turborepo | Shared packages and task orchestration |
+| Layer          | Choice                    | Rationale                                     |
+| -------------- | ------------------------- | --------------------------------------------- |
+| Desktop shell  | Tauri 2                   | Native desktop packaging with a web UI        |
+| UI             | React + TypeScript + Vite | Mature ecosystem and reusable UI              |
+| Backend        | NestJS                    | Structured modular Node backend               |
+| Database       | PostgreSQL                | Relational integrity and strong query support |
+| ORM/migrations | Prisma                    | Typed access and migration workflow           |
+| Cache/queue    | Redis + BullMQ            | Background jobs and transient coordination    |
+| API            | REST + OpenAPI 3.1        | Clear client/server boundary                  |
+| Storage        | S3-compatible             | Portable object storage                       |
+| Monorepo       | pnpm + Turborepo          | Shared packages and task orchestration        |
 
 Pin exact versions during M0 and commit all lockfiles.
 

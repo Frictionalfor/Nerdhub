@@ -14,6 +14,7 @@
 ## Versioning
 
 Use Semantic Versioning after the project establishes its first public API and release policy:
+
 - MAJOR for incompatible public API or data-contract changes.
 - MINOR for backward-compatible features.
 - PATCH for backward-compatible fixes.

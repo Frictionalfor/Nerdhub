@@ -80,6 +80,7 @@ Do not overwrite uncommitted user work. Never run destructive cleanup commands w
 ## 7. Required tests
 
 For each feature, add appropriate tests:
+
 - Unit tests for domain rules and validation.
 - Integration tests for database, API and queue boundaries.
 - Authorization tests for protected operations.
@@ -92,6 +93,7 @@ Never claim tests passed unless you ran them and captured the result.
 ## 8. Documentation obligations
 
 Update documentation when changing:
+
 - architecture or dependency direction → architecture docs and ADR,
 - database schema → data model and migration notes,
 - endpoints/contracts → OpenAPI and API docs,
@@ -114,6 +116,7 @@ Do not create fake generated documentation. Mark generated artifacts as generate
 ## 10. Definition of done
 
 A task is complete only when:
+
 1. Acceptance criteria are met.
 2. Relevant tests were added/updated and run.
 3. Formatting, lint, typecheck and build checks relevant to the task pass.
@@ -127,19 +130,25 @@ A task is complete only when:
 Return:
 
 ### Summary
+
 What changed and why.
 
 ### Files changed
+
 List important files.
 
 ### Validation
+
 Exact commands run and pass/fail results. Say “not run” where applicable.
 
 ### Security / data impact
+
 Permissions, secrets, migrations, user data and trust-boundary impact.
 
 ### Documentation
+
 Docs and ADRs updated.
 
 ### Remaining work
+
 Known limitations, follow-up tasks and anything requiring human decision.
