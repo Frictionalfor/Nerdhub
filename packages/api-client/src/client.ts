@@ -4,6 +4,17 @@ import { ApiClientError } from './errors.js';
 
 const JSON_CONTENT_TYPE = 'application/json';
 
+function isEnvelopedResponse<T>(body: unknown): body is ApiResponse<T> {
+  return (
+    body !== null &&
+    typeof body === 'object' &&
+    'data' in body &&
+    'meta' in body &&
+    typeof (body as { meta: unknown }).meta === 'object' &&
+    (body as { meta: unknown }).meta !== null
+  );
+}
+
 /**
  * Thin, typed fetch client for the NerdHub REST API.
  *
@@ -74,9 +85,19 @@ export class NerdHubApiClient {
         );
       }
 
+      if (isEnvelopedResponse<T>(body)) {
+        return {
+          data: body.data,
+          meta: {
+            ...body.meta,
+            requestId: body.meta.requestId || (response.headers.get('x-request-id') ?? ''),
+          },
+        };
+      }
+
       return {
-        data: ((body as ApiResponse<T>).data ?? body) as T,
-        meta: (body as ApiResponse<T>).meta ?? {
+        data: body as T,
+        meta: {
           requestId: response.headers.get('x-request-id') ?? '',
         },
       };

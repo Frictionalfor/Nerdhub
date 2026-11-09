@@ -20,6 +20,7 @@ describe('HttpExceptionFilter', () => {
       method: 'GET',
     } as never;
     const response = {
+      setHeader: jest.fn(),
       status: (code: number) => {
         expect(code).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
         return response;
@@ -50,6 +51,7 @@ describe('HttpExceptionFilter', () => {
 
     const request = { headers: {}, url: '/api/v1/health', method: 'GET' } as never;
     const response = {
+      setHeader: jest.fn(),
       status: (code: number) => {
         expect(code).toBe(HttpStatus.BAD_REQUEST);
         return response;

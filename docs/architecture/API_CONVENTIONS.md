@@ -33,7 +33,7 @@ These are route families, not a complete generated API contract. Define exact me
 
 ## Response shape
 
-Success responses should be consistent. Example:
+All successful API responses use a consistent envelope:
 
 ```json
 {
@@ -44,7 +44,29 @@ Success responses should be consistent. Example:
 }
 ```
 
-Error responses should be machine-readable and safe:
+- `data` holds the resource payload (may be an object, array, or `null` for
+  no-content mutations).
+- `meta.requestId` is a unique identifier for the request, useful for
+  correlating client reports with server logs.
+
+### Request ID
+
+Every response carries the request ID in the `X-Request-Id` response header.
+
+The server determines the request ID in this order:
+
+1. The `x-request-id` request header (configurable via `REQUEST_ID_HEADER`).
+2. The `x-amzn-requestid` request header.
+3. A freshly generated `crypto.randomUUID()` value.
+
+Clients SHOULD send `x-request-id` for idempotency and debugging; the server
+echoes it back in both the header and `meta.requestId`. Error responses also
+include `requestId` inside the `error` object and set the header.
+
+Responses that already carry the envelope shape (`{ data, meta }`) are passed
+through unchanged to avoid double-wrapping.
+
+Error responses are machine-readable and safe:
 
 ```json
 {
@@ -58,6 +80,13 @@ Error responses should be machine-readable and safe:
 ```
 
 Do not return stack traces, SQL, secrets or internal provider responses.
+
+### Health and readiness
+
+`GET /api/v1/health` and `GET /api/v1/readiness` are versioned API responses
+and are wrapped in the same envelope. Their semantics are preserved inside
+`data` (e.g. `data.status` is `'ok'` or `'degraded'`); they are not exempt from
+the envelope.
 
 ## Pagination
 
