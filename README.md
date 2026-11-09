@@ -4,8 +4,8 @@
 
 NerdHub is an open-source-core community and creation ecosystem for curious people. It brings together discussions, questions, ideas, blogs, projects, challenges, specialist communities, opportunities, learning resources and profile customization.
 
-> **Project status:** Pre-implementation / documentation baseline  
-> **Current target:** Desktop-first MVP  
+> **Project status:** M0 engineering foundation implemented
+> **Current target:** M1 — Identity and onboarding
 > **Product model:** Open-source core, independently operated official service
 
 ## What NerdHub is
@@ -32,36 +32,65 @@ Projects, clubs, challenges, opportunities, events, direct messaging, learning p
 
 ## Technology baseline
 
-| Area | Baseline |
-|---|---|
-| Desktop | Tauri 2, React, TypeScript, Vite |
-| API | NestJS modular monolith |
-| Database | PostgreSQL, Prisma |
-| Cache / jobs | Redis, BullMQ |
-| Worker | Separate Node.js process |
-| API contract | REST, OpenAPI 3.1 |
-| File storage | S3-compatible object storage |
-| Monorepo | pnpm workspaces, Turborepo |
-| Tests | Vitest/Jest as appropriate, Playwright for UI flows |
+| Area         | Baseline                                            |
+| ------------ | --------------------------------------------------- |
+| Desktop      | Tauri 2, React, TypeScript, Vite                    |
+| API          | NestJS modular monolith                             |
+| Database     | PostgreSQL, Prisma                                  |
+| Cache / jobs | Redis, BullMQ                                       |
+| Worker       | Separate Node.js process                            |
+| API contract | REST, OpenAPI 3.1                                   |
+| File storage | S3-compatible object storage                        |
+| Monorepo     | pnpm workspaces, Turborepo                          |
+| Tests        | Vitest/Jest as appropriate, Playwright for UI flows |
 
 The API is the authority for identity, permissions, moderation, XP, reputation and virtual currency. The desktop renderer must never be trusted to make these decisions.
 
 ## Repository status and setup
 
-This repository is being bootstrapped. The documentation pack defines the intended architecture and development contract; it does **not** claim that the application code, database migrations or generated OpenAPI document already exist.
+Milestone M0 (engineering foundation) is implemented. A clean checkout installs, lints, typechecks, tests and builds.
 
-Before the first application implementation, complete [Milestone 0](docs/ROADMAP.md) and verify that a clean checkout can install, lint, typecheck, test and build.
+### Local setup
 
-Expected local prerequisites:
+1. Install dependencies:
+   ```
+   pnpm install
+   ```
+2. Start local infrastructure (PostgreSQL + Redis):
+   ```
+   docker compose up -d
+   ```
+3. Generate the Prisma client and apply migrations:
+   ```
+   pnpm --filter @nerdhub/api prisma generate
+   DATABASE_URL=postgresql://nerdhub:nerdhub@localhost:5432/nerdhub pnpm --filter @nerdhub/api prisma migrate deploy
+   ```
+4. Copy the environment file:
+   ```
+   cp .env.example .env
+   ```
+
+### Verification
+
+```
+pnpm format:check
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+The API and worker expect `DATABASE_URL` and `REDIS_URL` from the environment (see `.env.example`).
+
+### Prerequisites
 
 - Git
-- Node.js LTS compatible with the pinned project toolchain
-- pnpm (version pinned in `package.json` once the workspace is created)
-- Rust toolchain required by Tauri
-- Platform build dependencies for Tauri
+- Node.js (version pinned in `.node-version` / `package.json` engines)
+- pnpm (version pinned in `package.json` packageManager)
+- Rust toolchain required to build/run the Tauri desktop binary (frontend typecheck/build via Vite does not require Rust)
 - Docker Engine and Compose plugin for local PostgreSQL and Redis
 
-Use the exact versions recorded in the repository's `package.json`, `.node-version`/`.nvmrc`, `rust-toolchain.toml` and lockfiles once they are added. Do not guess versions or silently upgrade toolchains.
+Use the exact versions recorded in `package.json`, `.node-version` and `pnpm-lock.yaml`.
 
 ## Documentation map
 
@@ -113,6 +142,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CON
 ## Licensing
 
 The intended licensing model has not yet been legally selected. Do not publish a license file or claim that the project is MIT/Apache/GPL until the maintainers explicitly decide:
+
 - the license for application source,
 - the license for documentation and design assets,
 - treatment of trademarks and the NerdHub name,
@@ -122,4 +152,4 @@ See [License decision](docs/engineering/LICENSE_DECISION.md).
 
 ## Status
 
-This repository is a product and engineering specification ready to be translated into an executable workspace. The next task is Milestone 0, not building every product module at once.
+The M0 engineering foundation is complete. The next milestone is M1 — Identity and onboarding; see [the roadmap](docs/ROADMAP.md).

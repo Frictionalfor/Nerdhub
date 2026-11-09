@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.tauri.build/tauri/v2/_manifest.json",
+  "productName": "NerdHub",
+  "version": "0.0.0-m0",
+  "identifier": "com.nerdhub.app",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "NerdHub",
+        "width": 1200,
+        "height": 800,
+        "resizable": true,
+        "fullscreen": false,
+        "minWidth": 900,
+        "minHeight": 600
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' http://localhost:4000 ws://localhost:5173;"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "category": "Social",
+    "shortDescription": "A place where curiosity has no boundaries.",
+    "longDescription": "NerdHub desktop shell — Tauri 2 + React + TypeScript + Vite.",
+    "targets": "all"
+  }
+}

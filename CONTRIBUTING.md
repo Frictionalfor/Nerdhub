@@ -34,6 +34,7 @@ Use Conventional Commits where practical:
 ## Pull request expectations
 
 A PR should include:
+
 - Problem and context.
 - Proposed behavior and scope.
 - Linked issue or decision.

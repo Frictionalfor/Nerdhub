@@ -11,12 +11,14 @@ nerdhub/
 ├── packages/
 │   ├── contracts/               # Shared DTO/schema contracts
 │   ├── api-client/              # Typed API client
-│   ├── config/                  # Shared lint/tsconfig config
-│   ├── ui/                      # Shared UI primitives (when justified)
-│   └── validation/              # Shared validation only where safe
+│   ├── config/                  # Shared lint/tsconfig/prettier config
+│   └── ui/                      # Shared UI primitives (when justified)
 ├── prisma/
 │   ├── schema.prisma
 │   └── migrations/
+│       └── 0001_init/
+├── docker-compose.yml           # Local PostgreSQL + Redis
+├── .env.example
 ├── docs/
 ├── scripts/
 ├── .github/
@@ -34,7 +36,7 @@ nerdhub/
 ├── pnpm-workspace.yaml
 ├── pnpm-lock.yaml
 ├── turbo.json
-├── .env.example
+├── tsconfig.base.json
 └── .gitignore
 ```
 

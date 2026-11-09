@@ -12,7 +12,7 @@ service\
 **Authentication:** Email/password plus multiple OAuth/OIDC providers\
 **Infrastructure:** Hybrid cloud and self-hosted services
 
-------------------------------------------------------------------------
+---
 
 # 0. Executive decisions
 
@@ -56,21 +56,21 @@ schema change for every new subject.
 
 ## 0.3 Explicit non-goals for the first release
 
--   A general-purpose code execution service.
--   Real-time voice/video rooms.
--   Native iOS/Android applications.
--   A full learning management system.
--   A marketplace with cash payouts.
--   Microservices or Kubernetes.
--   AI-generated content as a core dependency.
--   A custom programming judge capable of safely running arbitrary code.
--   A decentralized/federated social protocol.
--   Public APIs for every internal operation.
+- A general-purpose code execution service.
+- Real-time voice/video rooms.
+- Native iOS/Android applications.
+- A full learning management system.
+- A marketplace with cash payouts.
+- Microservices or Kubernetes.
+- AI-generated content as a core dependency.
+- A custom programming judge capable of safely running arbitrary code.
+- A decentralized/federated social protocol.
+- Public APIs for every internal operation.
 
 These may be considered after the MVP has real usage and operational
 evidence.
 
-------------------------------------------------------------------------
+---
 
 # 1. Goals, users and success criteria
 
@@ -115,19 +115,19 @@ enforce community rules.
 
 The first public release must let a user:
 
--   Install and launch NerdHub on a supported desktop OS.
--   Create an account or sign in using supported identity providers.
--   Complete onboarding and choose interests.
--   Discover and follow topics.
--   Publish a discussion, question or idea.
--   Comment, react, bookmark and report content.
--   Publish a basic long-form blog.
--   Maintain a profile with interests and links.
--   Earn transparent XP for a limited set of validated actions.
--   View basic achievements and leaderboards.
--   Receive in-app notifications.
--   Customize a profile with a small initial cosmetic catalogue.
--   Export or request deletion of their account data.
+- Install and launch NerdHub on a supported desktop OS.
+- Create an account or sign in using supported identity providers.
+- Complete onboarding and choose interests.
+- Discover and follow topics.
+- Publish a discussion, question or idea.
+- Comment, react, bookmark and report content.
+- Publish a basic long-form blog.
+- Maintain a profile with interests and links.
+- Earn transparent XP for a limited set of validated actions.
+- View basic achievements and leaderboards.
+- Receive in-app notifications.
+- Customize a profile with a small initial cosmetic catalogue.
+- Export or request deletion of their account data.
 
 ## 1.3 MVP exclusions
 
@@ -139,22 +139,22 @@ mobile apps are not required for v0.1.
 
 Measure quality, not addictive engagement.
 
--   Activation: percentage completing onboarding and performing a
-    meaningful action.
--   First contribution time.
--   Weekly active contributors, not only weekly active viewers.
--   Question response rate and time to first useful response.
--   Percentage of discussions receiving meaningful replies.
--   Blog completion and reading quality signals.
--   Idea-to-collaboration conversion.
--   Report volume, moderation response time and repeat abuse.
--   Retention by interest area.
--   Accessibility and crash-free session rate.
+- Activation: percentage completing onboarding and performing a
+  meaningful action.
+- First contribution time.
+- Weekly active contributors, not only weekly active viewers.
+- Question response rate and time to first useful response.
+- Percentage of discussions receiving meaningful replies.
+- Blog completion and reading quality signals.
+- Idea-to-collaboration conversion.
+- Report volume, moderation response time and repeat abuse.
+- Retention by interest area.
+- Accessibility and crash-free session rate.
 
 Do not optimize for time spent, notification opens or raw post volume in
 isolation.
 
-------------------------------------------------------------------------
+---
 
 # 2. Product modules and functional requirements
 
@@ -165,22 +165,22 @@ later ecosystem.
 
 Requirements:
 
--   Email/password registration and login.
--   Email verification.
--   Password reset with expiring, single-use tokens.
--   OAuth/OIDC login through GitHub and Google initially; provider
-    adapter must support Microsoft, Discord and additional OIDC
-    providers.
--   Passkeys/WebAuthn as a planned provider.
--   Secure session revocation and sign-out-all-devices.
--   Optional TOTP MFA after MVP foundation.
--   Account linking only after the user proves control of both
-    identities.
--   Rate limits and abuse controls for login, registration and recovery.
--   No provider access token exposed to the renderer or logged.
--   OAuth desktop flow uses system browser, PKCE/state/nonce, and a
-    verified app deep-link callback or localhost callback with strict
-    state validation.
+- Email/password registration and login.
+- Email verification.
+- Password reset with expiring, single-use tokens.
+- OAuth/OIDC login through GitHub and Google initially; provider
+  adapter must support Microsoft, Discord and additional OIDC
+  providers.
+- Passkeys/WebAuthn as a planned provider.
+- Secure session revocation and sign-out-all-devices.
+- Optional TOTP MFA after MVP foundation.
+- Account linking only after the user proves control of both
+  identities.
+- Rate limits and abuse controls for login, registration and recovery.
+- No provider access token exposed to the renderer or logged.
+- OAuth desktop flow uses system browser, PKCE/state/nonce, and a
+  verified app deep-link callback or localhost callback with strict
+  state validation.
 
 Acceptance criteria: - Invalid, expired and reused verification/reset
 tokens are rejected. - A user can see and revoke active sessions. -
@@ -190,37 +190,37 @@ unique according to documented case-insensitive rules.
 
 ## 2.2 Onboarding and interests --- P0
 
--   Select display name and unique handle.
--   Choose at least one interest, but allow skipping.
--   Select experience level per interest as optional self-description,
-    not verified expertise.
--   Follow suggested topics and clubs.
--   Configure notification preferences.
--   Explain XP, reputation and cosmetics clearly.
--   Allow onboarding to be resumed.
+- Select display name and unique handle.
+- Choose at least one interest, but allow skipping.
+- Select experience level per interest as optional self-description,
+  not verified expertise.
+- Follow suggested topics and clubs.
+- Configure notification preferences.
+- Explain XP, reputation and cosmetics clearly.
+- Allow onboarding to be resumed.
 
 ## 2.3 Profiles --- P0
 
--   Avatar, banner, bio, handle and display name.
--   Interest tags and external links.
--   Featured projects and articles (P1).
--   Equipped frame and profile theme.
--   Public profile visibility settings.
--   Block and report controls.
--   Profile activity summary with privacy controls.
--   Never expose email or private account identifiers publicly.
+- Avatar, banner, bio, handle and display name.
+- Interest tags and external links.
+- Featured projects and articles (P1).
+- Equipped frame and profile theme.
+- Public profile visibility settings.
+- Block and report controls.
+- Profile activity summary with privacy controls.
+- Never expose email or private account identifiers publicly.
 
 ## 2.4 Topic taxonomy and discovery --- P0
 
--   Hierarchical topics with parent-child relationships.
--   A content item can have multiple topics.
--   Users can follow/unfollow topics.
--   Topics can be created by administrators/moderators initially.
--   Search people, topics and content.
--   Feed modes: Following, Latest and Recommended (recommendation can
-    initially be rule-based).
--   Pagination uses cursor-based pagination.
--   Topic slugs are stable; display names can change.
+- Hierarchical topics with parent-child relationships.
+- A content item can have multiple topics.
+- Users can follow/unfollow topics.
+- Topics can be created by administrators/moderators initially.
+- Search people, topics and content.
+- Feed modes: Following, Latest and Recommended (recommendation can
+  initially be rule-based).
+- Pagination uses cursor-based pagination.
+- Topic slugs are stable; display names can change.
 
 Initial taxonomy examples: - Computer Science - Algorithms and Data
 Structures - Operating Systems - Databases - Compilers and Languages -
@@ -270,14 +270,14 @@ Citations/references. - Draft autosave and collaborative editing
 
 ## 2.7 Projects --- P1
 
--   Project page with title, description, status, topics, links and
-    media.
--   Owner and contributor roles.
--   Roadmap and release notes.
--   Link project to originating idea.
--   Collaboration request workflow.
--   GitHub integration must use least-privilege OAuth scopes and clearly
-    explain data access.
+- Project page with title, description, status, topics, links and
+  media.
+- Owner and contributor roles.
+- Roadmap and release notes.
+- Link project to originating idea.
+- Collaboration request workflow.
+- GitHub integration must use least-privilege OAuth scopes and clearly
+  explain data access.
 
 ## 2.8 Challenges and competitions --- P1/P2
 
@@ -320,13 +320,13 @@ unlimited reactions.
 
 ## 2.10 Clubs --- P1
 
--   Public/private club.
--   Owner, moderator and member roles.
--   Membership requests and invitations.
--   Club topic association.
--   Club feed and announcements.
--   Club-specific events/challenges later.
--   Club moderation remains subordinate to platform policy.
+- Public/private club.
+- Owner, moderator and member roles.
+- Membership requests and invitations.
+- Club topic association.
+- Club feed and announcements.
+- Club-specific events/challenges later.
+- Club moderation remains subordinate to platform policy.
 
 ## 2.11 Opportunities --- P1
 
@@ -356,48 +356,48 @@ challenges.
 
 ## 2.13 Messaging and notifications --- P1
 
--   In-app notifications first.
--   Email notification preferences.
--   DMs and group messages only after block/report/abuse controls.
--   Notification deduplication and user-controlled categories.
--   No push-notification spam.
--   Real-time delivery is an enhancement; durable notification records
-    are authoritative.
+- In-app notifications first.
+- Email notification preferences.
+- DMs and group messages only after block/report/abuse controls.
+- Notification deduplication and user-controlled categories.
+- No push-notification spam.
+- Real-time delivery is an enhancement; durable notification records
+  are authoritative.
 
 ## 2.14 Administration and moderation --- P0
 
--   Report queue and triage.
--   Content/user actions with reason codes.
--   Role-based permissions.
--   Appeals and review history.
--   Audit log.
--   Topic/tag management.
--   XP policy configuration.
--   User suspension and ban workflows.
--   Moderator actions must be traceable and least-privileged.
--   Moderators must not see private user data unless required for a
-    documented case.
+- Report queue and triage.
+- Content/user actions with reason codes.
+- Role-based permissions.
+- Appeals and review history.
+- Audit log.
+- Topic/tag management.
+- XP policy configuration.
+- User suspension and ban workflows.
+- Moderator actions must be traceable and least-privileged.
+- Moderators must not see private user data unless required for a
+  documented case.
 
-------------------------------------------------------------------------
+---
 
 # 3. Desktop application and UX specification
 
 ## 3.1 Desktop technology
 
--   Tauri 2 shell.
--   React + TypeScript + Vite renderer.
--   Rust only for Tauri commands, OS integration and secure local
-    capabilities.
--   TanStack Router or React Router.
--   TanStack Query for server state.
--   Zustand only for small client UI state; avoid duplicating server
-    state.
--   Tailwind CSS and shadcn/ui primitives.
--   Motion for purposeful animation.
--   TipTap or Markdown-first editor; select one after a small technical
-    spike.
--   SQLite for local cache/drafts only if offline requirements justify
-    it; server PostgreSQL remains source of truth.
+- Tauri 2 shell.
+- React + TypeScript + Vite renderer.
+- Rust only for Tauri commands, OS integration and secure local
+  capabilities.
+- TanStack Router or React Router.
+- TanStack Query for server state.
+- Zustand only for small client UI state; avoid duplicating server
+  state.
+- Tailwind CSS and shadcn/ui primitives.
+- Motion for purposeful animation.
+- TipTap or Markdown-first editor; select one after a small technical
+  spike.
+- SQLite for local cache/drafts only if offline requirements justify
+  it; server PostgreSQL remains source of truth.
 
 Do not embed the NestJS backend inside the desktop app. Do not store
 privileged service secrets in the client.
@@ -416,18 +416,18 @@ not ship dead navigation.
 
 ## 3.3 Visual design
 
--   Dark-first, light mode supported.
--   Deep neutral surfaces, restrained violet primary accent, cyan
-    secondary accent.
--   Geist or Inter typography.
--   Lucide icons.
--   Dense but readable information layouts.
--   Consistent spacing, focus states, hover states and loading
-    skeletons.
--   Respect reduced-motion setting.
--   Keyboard-first navigation and accessible dialogs.
--   No excessive glassmorphism, neon or decorative animation.
--   Responsive layouts for different desktop window sizes.
+- Dark-first, light mode supported.
+- Deep neutral surfaces, restrained violet primary accent, cyan
+  secondary accent.
+- Geist or Inter typography.
+- Lucide icons.
+- Dense but readable information layouts.
+- Consistent spacing, focus states, hover states and loading
+  skeletons.
+- Respect reduced-motion setting.
+- Keyboard-first navigation and accessible dialogs.
+- No excessive glassmorphism, neon or decorative animation.
+- Responsive layouts for different desktop window sizes.
 
 ## 3.4 Offline behavior
 
@@ -445,7 +445,7 @@ should be tested on the project's declared supported distributions and
 Wayland/X11 environments. Publish a support matrix and test packages
 before claiming broad compatibility.
 
-------------------------------------------------------------------------
+---
 
 # 4. Technical architecture
 
@@ -458,7 +458,7 @@ transactions without preventing later extraction.
 
 ## 4.2 Logical architecture
 
-``` text
+```text
 Tauri Desktop Client
   └── React + TypeScript Renderer
        ├── Feature modules
@@ -498,55 +498,58 @@ Tauri Desktop Client
 
 ## 4.3 Recommended stack
 
-  -----------------------------------------------------------------------
-  Layer                               Choice
-  ----------------------------------- -----------------------------------
-  Desktop                             Tauri 2
+---
 
-  Frontend                            React, TypeScript, Vite
+Layer Choice
 
-  Routing                             TanStack Router
+---
 
-  Server state                        TanStack Query
+Desktop Tauri 2
 
-  UI                                  Tailwind CSS, shadcn/ui
+Frontend React, TypeScript, Vite
 
-  Backend                             NestJS, TypeScript
+Routing TanStack Router
 
-  API                                 REST, OpenAPI 3.1
+Server state TanStack Query
 
-  Validation                          Zod at client boundary;
-                                      class-validator or Zod consistently
-                                      on API
+UI Tailwind CSS, shadcn/ui
 
-  Database                            PostgreSQL
+Backend NestJS, TypeScript
 
-  ORM                                 Prisma
+API REST, OpenAPI 3.1
 
-  Cache/queues                        Redis + BullMQ
+Validation Zod at client boundary;
+class-validator or Zod consistently
+on API
 
-  Realtime                            Socket.IO later
+Database PostgreSQL
 
-  Search MVP                          PostgreSQL full-text search
+ORM Prisma
 
-  Search later                        Meilisearch or OpenSearch after
-                                      measurement
+Cache/queues Redis + BullMQ
 
-  Storage                             S3-compatible object storage
+Realtime Socket.IO later
 
-  Email                               Provider adapter; local development
-                                      mail catcher
+Search MVP PostgreSQL full-text search
 
-  Tests                               Vitest, Supertest, Playwright, Rust
-                                      tests
+Search later Meilisearch or OpenSearch after
+measurement
 
-  Observability                       OpenTelemetry, structured logs,
-                                      error reporting
+Storage S3-compatible object storage
 
-  Deployment                          Docker Compose initially
+Email Provider adapter; local development
+mail catcher
 
-  CI                                  GitHub Actions
-  -----------------------------------------------------------------------
+Tests Vitest, Supertest, Playwright, Rust
+tests
+
+Observability OpenTelemetry, structured logs,
+error reporting
+
+Deployment Docker Compose initially
+
+CI GitHub Actions
+-----------------------------------------------------------------------
 
 Do not introduce Kafka, Kubernetes, Elasticsearch or multiple databases
 before a measured need exists.
@@ -565,34 +568,34 @@ duplication. Select one production source of truth for each service.
 
 ## 4.5 Security boundaries
 
--   TLS for all remote traffic.
--   Secrets only in server-side secret storage/environment.
--   Argon2id password hashing.
--   OAuth authorization code + PKCE.
--   Secure, HTTP-only cookies for browser clients; desktop token/session
-    handling must be reviewed for Tauri.
--   CSRF protections where cookies are used.
--   Strict CORS allowlist.
--   Content Security Policy.
--   Input validation at every API boundary.
--   Output encoding and safe Markdown sanitization.
--   File signature checks, size limits, image re-encoding and malware
-    scanning where feasible.
--   Rate limits by IP, account and action.
--   Audit sensitive actions.
--   Encrypt backups and test restores.
--   Dependency and container scanning in CI.
--   No arbitrary code execution in API or worker.
--   Data export and account deletion workflows.
+- TLS for all remote traffic.
+- Secrets only in server-side secret storage/environment.
+- Argon2id password hashing.
+- OAuth authorization code + PKCE.
+- Secure, HTTP-only cookies for browser clients; desktop token/session
+  handling must be reviewed for Tauri.
+- CSRF protections where cookies are used.
+- Strict CORS allowlist.
+- Content Security Policy.
+- Input validation at every API boundary.
+- Output encoding and safe Markdown sanitization.
+- File signature checks, size limits, image re-encoding and malware
+  scanning where feasible.
+- Rate limits by IP, account and action.
+- Audit sensitive actions.
+- Encrypt backups and test restores.
+- Dependency and container scanning in CI.
+- No arbitrary code execution in API or worker.
+- Data export and account deletion workflows.
 
-------------------------------------------------------------------------
+---
 
 # 5. Monorepo structure
 
 Use pnpm workspaces and Turborepo for JavaScript/TypeScript tasks. Keep
 Rust Tauri code in the desktop app. Use a single lockfile.
 
-``` text
+```text
 nerdhub/
 ├── apps/
 │   ├── desktop/
@@ -694,7 +697,7 @@ DTOs and shared types, not database models. - Avoid circular imports. -
 Every module owns its controllers, services, DTOs, policies and tests. -
 Do not create a generic `utils` dumping ground.
 
-------------------------------------------------------------------------
+---
 
 # 6. Database specification
 
@@ -711,14 +714,14 @@ constraints and indexes to preserve during migration review.
 
 ### users
 
--   id UUID PK
--   email CITEXT UNIQUE NOT NULL
--   email_verified_at timestamptz nullable
--   password_hash text nullable
--   status enum: pending, active, suspended, banned, deletion_pending,
-    deleted
--   created_at, updated_at timestamptz
--   last_login_at timestamptz nullable
+- id UUID PK
+- email CITEXT UNIQUE NOT NULL
+- email_verified_at timestamptz nullable
+- password_hash text nullable
+- status enum: pending, active, suspended, banned, deletion_pending,
+  deleted
+- created_at, updated_at timestamptz
+- last_login_at timestamptz nullable
 
 ### accounts
 
@@ -733,63 +736,63 @@ tokens at rest and request minimum scopes.
 
 ### sessions
 
--   id UUID PK
--   user_id UUID FK
--   token_hash text UNIQUE
--   device_label text nullable
--   expires_at timestamptz
--   revoked_at timestamptz nullable
--   created_at timestamptz
--   last_seen_at timestamptz
+- id UUID PK
+- user_id UUID FK
+- token_hash text UNIQUE
+- device_label text nullable
+- expires_at timestamptz
+- revoked_at timestamptz nullable
+- created_at timestamptz
+- last_seen_at timestamptz
 
 ### auth_tokens
 
--   id UUID PK
--   user_id UUID FK
--   token_hash text UNIQUE
--   purpose enum: verify_email, reset_password, link_account
--   expires_at timestamptz
--   consumed_at timestamptz nullable
--   created_at timestamptz
+- id UUID PK
+- user_id UUID FK
+- token_hash text UNIQUE
+- purpose enum: verify_email, reset_password, link_account
+- expires_at timestamptz
+- consumed_at timestamptz nullable
+- created_at timestamptz
 
 ### profiles
 
--   user_id UUID PK/FK users
--   handle CITEXT UNIQUE
--   display_name text
--   bio text nullable
--   avatar_asset_id UUID nullable
--   banner_asset_id UUID nullable
--   visibility enum: public, members, private
--   equipped_frame_id UUID nullable
--   equipped_theme_id UUID nullable
--   created_at, updated_at
+- user_id UUID PK/FK users
+- handle CITEXT UNIQUE
+- display_name text
+- bio text nullable
+- avatar_asset_id UUID nullable
+- banner_asset_id UUID nullable
+- visibility enum: public, members, private
+- equipped_frame_id UUID nullable
+- equipped_theme_id UUID nullable
+- created_at, updated_at
 
 ### user_links
 
--   id UUID PK
--   user_id UUID FK
--   label text
--   url text
--   sort_order int
--   UNIQUE(user_id, sort_order)
+- id UUID PK
+- user_id UUID FK
+- label text
+- url text
+- sort_order int
+- UNIQUE(user_id, sort_order)
 
 ### user_interests
 
--   user_id UUID FK
--   topic_id UUID FK
--   proficiency_label enum: exploring, beginner, intermediate, advanced,
-    expert nullable
--   created_at
--   PK(user_id, topic_id)
+- user_id UUID FK
+- topic_id UUID FK
+- proficiency_label enum: exploring, beginner, intermediate, advanced,
+  expert nullable
+- created_at
+- PK(user_id, topic_id)
 
 Self-reported proficiency must not be presented as verified expertise.
 
 ### roles / user_roles
 
--   roles(id, key UNIQUE, description)
--   user_roles(user_id FK, role_id FK, granted_by UUID nullable,
-    granted_at, PK(user_id, role_id))
+- roles(id, key UNIQUE, description)
+- user_roles(user_id FK, role_id FK, granted_by UUID nullable,
+  granted_at, PK(user_id, role_id))
 
 Use permission policies rather than hardcoding role names in every
 controller.
@@ -798,26 +801,26 @@ controller.
 
 ### topics
 
--   id UUID PK
--   parent_id UUID nullable FK topics
--   name text
--   slug CITEXT UNIQUE
--   description text nullable
--   status enum: active, archived
--   created_at, updated_at
+- id UUID PK
+- parent_id UUID nullable FK topics
+- name text
+- slug CITEXT UNIQUE
+- description text nullable
+- status enum: active, archived
+- created_at, updated_at
 
 ### topic_follows
 
--   user_id UUID FK
--   topic_id UUID FK
--   created_at
--   PK(user_id, topic_id)
+- user_id UUID FK
+- topic_id UUID FK
+- created_at
+- PK(user_id, topic_id)
 
 ### tags
 
--   id UUID PK
--   name CITEXT UNIQUE
--   slug CITEXT UNIQUE
+- id UUID PK
+- name CITEXT UNIQUE
+- slug CITEXT UNIQUE
 
 Content-to-topic and content-to-tag joins are defined below.
 
@@ -837,38 +840,38 @@ text for search. Never trust client-provided sanitized HTML.
 
 ### post_topics
 
--   post_id UUID FK posts
--   topic_id UUID FK topics
--   PK(post_id, topic_id)
+- post_id UUID FK posts
+- topic_id UUID FK topics
+- PK(post_id, topic_id)
 
 ### post_tags
 
--   post_id UUID FK posts
--   tag_id UUID FK tags
--   PK(post_id, tag_id)
+- post_id UUID FK posts
+- tag_id UUID FK tags
+- PK(post_id, tag_id)
 
 ### comments
 
--   id UUID PK
--   post_id UUID FK posts
--   author_id UUID FK users
--   parent_id UUID nullable FK comments
--   body_json jsonb
--   body_text text
--   status enum: visible, hidden, deleted
--   created_at, updated_at, deleted_at nullable
+- id UUID PK
+- post_id UUID FK posts
+- author_id UUID FK users
+- parent_id UUID nullable FK comments
+- body_json jsonb
+- body_text text
+- status enum: visible, hidden, deleted
+- created_at, updated_at, deleted_at nullable
 
 Limit nesting depth in application logic; use parent-child threads.
 
 ### reactions
 
--   id UUID PK
--   user_id UUID FK users
--   target_type enum: post, comment, article
--   target_id UUID
--   reaction_type enum: helpful, insightful, celebrate, like
--   created_at
--   UNIQUE(user_id, target_type, target_id, reaction_type)
+- id UUID PK
+- user_id UUID FK users
+- target_type enum: post, comment, article
+- target_id UUID
+- reaction_type enum: helpful, insightful, celebrate, like
+- created_at
+- UNIQUE(user_id, target_type, target_id, reaction_type)
 
 Because polymorphic target IDs cannot have a normal FK, validate target
 existence in a service transaction. Alternatively use separate typed
@@ -876,209 +879,209 @@ join tables if stronger referential integrity is preferred.
 
 ### bookmarks
 
--   user_id UUID FK
--   target_type enum: post, article, project, resource
--   target_id UUID
--   created_at
--   PK(user_id, target_type, target_id)
+- user_id UUID FK
+- target_type enum: post, article, project, resource
+- target_id UUID
+- created_at
+- PK(user_id, target_type, target_id)
 
 ### question_answers
 
--   id UUID PK
--   post_id UUID FK posts UNIQUE
--   accepted_comment_id UUID nullable FK comments
--   resolved_at timestamptz nullable
--   resolved_by UUID nullable FK users
+- id UUID PK
+- post_id UUID FK posts UNIQUE
+- accepted_comment_id UUID nullable FK comments
+- resolved_at timestamptz nullable
+- resolved_by UUID nullable FK users
 
 If answers are represented as comments, enforce that accepted comment
 belongs to the same post.
 
 ### post_revisions
 
--   id UUID PK
--   post_id UUID FK posts
--   editor_id UUID FK users
--   version int
--   body_json jsonb
--   body_text text
--   created_at
--   UNIQUE(post_id, version)
+- id UUID PK
+- post_id UUID FK posts
+- editor_id UUID FK users
+- version int
+- body_json jsonb
+- body_text text
+- created_at
+- UNIQUE(post_id, version)
 
 ## 6.4 Blogs
 
 ### articles
 
--   id UUID PK
--   author_id UUID FK users
--   slug CITEXT UNIQUE
--   title text
--   excerpt text nullable
--   body_json jsonb
--   body_text text
--   cover_asset_id UUID nullable
--   status enum: draft, published, archived
--   visibility enum: public, members, unlisted
--   published_at timestamptz nullable
--   created_at, updated_at
--   reading_time_minutes int nullable
+- id UUID PK
+- author_id UUID FK users
+- slug CITEXT UNIQUE
+- title text
+- excerpt text nullable
+- body_json jsonb
+- body_text text
+- cover_asset_id UUID nullable
+- status enum: draft, published, archived
+- visibility enum: public, members, unlisted
+- published_at timestamptz nullable
+- created_at, updated_at
+- reading_time_minutes int nullable
 
 ### article_topics
 
--   article_id UUID FK
--   topic_id UUID FK
--   PK(article_id, topic_id)
+- article_id UUID FK
+- topic_id UUID FK
+- PK(article_id, topic_id)
 
 ### article_revisions
 
--   id UUID PK
--   article_id UUID FK
--   editor_id UUID FK users
--   version int
--   snapshot_json jsonb
--   created_at
--   UNIQUE(article_id, version)
+- id UUID PK
+- article_id UUID FK
+- editor_id UUID FK users
+- version int
+- snapshot_json jsonb
+- created_at
+- UNIQUE(article_id, version)
 
 ## 6.5 Idea Lab
 
 ### ideas
 
--   post_id UUID PK/FK posts
--   problem_statement text
--   proposed_solution text
--   expected_impact text nullable
--   status enum: concept, feedback, seeking_collaborators,
-    in_development, prototype, released, archived
--   license_id UUID nullable
--   updated_at
+- post_id UUID PK/FK posts
+- problem_statement text
+- proposed_solution text
+- expected_impact text nullable
+- status enum: concept, feedback, seeking_collaborators,
+  in_development, prototype, released, archived
+- license_id UUID nullable
+- updated_at
 
 ### idea_collaborators
 
--   idea_id UUID FK ideas
--   user_id UUID FK users
--   role text
--   status enum: invited, requested, accepted, declined, removed
--   created_at, updated_at
--   PK(idea_id, user_id)
+- idea_id UUID FK ideas
+- user_id UUID FK users
+- role text
+- status enum: invited, requested, accepted, declined, removed
+- created_at, updated_at
+- PK(idea_id, user_id)
 
 ### idea_updates
 
--   id UUID PK
--   idea_id UUID FK ideas
--   author_id UUID FK users
--   title text
--   body_json jsonb
--   created_at
+- id UUID PK
+- idea_id UUID FK ideas
+- author_id UUID FK users
+- title text
+- body_json jsonb
+- created_at
 
 ## 6.6 Projects (P1)
 
 ### projects
 
--   id UUID PK
--   owner_id UUID FK users
--   originating_idea_id UUID nullable FK ideas
--   slug CITEXT UNIQUE
--   name text
--   description text
--   status enum: planning, active, paused, released, archived
--   visibility enum: public, members, private
--   repository_url text nullable
--   demo_url text nullable
--   created_at, updated_at
+- id UUID PK
+- owner_id UUID FK users
+- originating_idea_id UUID nullable FK ideas
+- slug CITEXT UNIQUE
+- name text
+- description text
+- status enum: planning, active, paused, released, archived
+- visibility enum: public, members, private
+- repository_url text nullable
+- demo_url text nullable
+- created_at, updated_at
 
 ### project_members
 
--   project_id UUID FK
--   user_id UUID FK users
--   role enum: owner, maintainer, contributor
--   joined_at
--   PK(project_id, user_id)
+- project_id UUID FK
+- user_id UUID FK users
+- role enum: owner, maintainer, contributor
+- joined_at
+- PK(project_id, user_id)
 
 ### project_releases
 
--   id UUID PK
--   project_id UUID FK
--   version text
--   title text
--   notes text
--   released_at timestamptz
+- id UUID PK
+- project_id UUID FK
+- version text
+- title text
+- notes text
+- released_at timestamptz
 
 ## 6.7 Gamification
 
 ### xp_transactions
 
--   id UUID PK
--   user_id UUID FK users
--   amount int NOT NULL
--   reason_code text
--   source_type text
--   source_id UUID nullable
--   idempotency_key text UNIQUE
--   policy_version text
--   created_at
--   reversal_of UUID nullable FK xp_transactions
--   metadata jsonb default {}
+- id UUID PK
+- user_id UUID FK users
+- amount int NOT NULL
+- reason_code text
+- source_type text
+- source_id UUID nullable
+- idempotency_key text UNIQUE
+- policy_version text
+- created_at
+- reversal_of UUID nullable FK xp_transactions
+- metadata jsonb default {}
 
 Ledger is append-only. Enforce authorization and permitted reversal
 rules in the service.
 
 ### user_progress
 
--   user_id UUID PK/FK users
--   total_xp bigint
--   current_level int
--   updated_at
+- user_id UUID PK/FK users
+- total_xp bigint
+- current_level int
+- updated_at
 
 This is a derived cache. Reconciliation must be possible from ledger
 entries.
 
 ### achievements
 
--   id UUID PK
--   key CITEXT UNIQUE
--   name text
--   description text
--   icon_asset_id UUID nullable
--   criteria_json jsonb
--   active boolean
--   created_at
+- id UUID PK
+- key CITEXT UNIQUE
+- name text
+- description text
+- icon_asset_id UUID nullable
+- criteria_json jsonb
+- active boolean
+- created_at
 
 ### user_achievements
 
--   user_id UUID FK
--   achievement_id UUID FK
--   awarded_at timestamptz
--   evidence_json jsonb
--   PK(user_id, achievement_id)
+- user_id UUID FK
+- achievement_id UUID FK
+- awarded_at timestamptz
+- evidence_json jsonb
+- PK(user_id, achievement_id)
 
 ### nerdcoin_transactions
 
--   id UUID PK
--   user_id UUID FK users
--   amount int
--   reason_code text
--   idempotency_key text UNIQUE
--   source_type text
--   source_id UUID nullable
--   created_at
--   reversal_of UUID nullable FK nerdcoin_transactions
+- id UUID PK
+- user_id UUID FK users
+- amount int
+- reason_code text
+- idempotency_key text UNIQUE
+- source_type text
+- source_id UUID nullable
+- created_at
+- reversal_of UUID nullable FK nerdcoin_transactions
 
 ### user_wallets
 
--   user_id UUID PK/FK users
--   balance bigint
--   updated_at
+- user_id UUID PK/FK users
+- balance bigint
+- updated_at
 
 Derived from the coin ledger; update atomically with ledger insertion.
 
 ### leaderboard_snapshots
 
--   id UUID PK
--   scope_type enum: global, topic, weekly, monthly, seasonal
--   scope_id UUID nullable
--   period_start timestamptz nullable
--   period_end timestamptz nullable
--   generated_at timestamptz
--   entries_json jsonb
+- id UUID PK
+- scope_type enum: global, topic, weekly, monthly, seasonal
+- scope_id UUID nullable
+- period_start timestamptz nullable
+- period_end timestamptz nullable
+- generated_at timestamptz
+- entries_json jsonb
 
 For large leaderboards, migrate to normalized snapshot rows rather than
 one JSON document.
@@ -1087,32 +1090,32 @@ one JSON document.
 
 ### cosmetics
 
--   id UUID PK
--   key CITEXT UNIQUE
--   name text
--   type enum: avatar_frame, banner, theme, badge, decoration
--   rarity enum: common, uncommon, rare, epic, legendary
--   asset_id UUID nullable
--   acquisition_type enum: achievement, event, earned, grant, purchase
--   active boolean
--   metadata jsonb
--   created_at
+- id UUID PK
+- key CITEXT UNIQUE
+- name text
+- type enum: avatar_frame, banner, theme, badge, decoration
+- rarity enum: common, uncommon, rare, epic, legendary
+- asset_id UUID nullable
+- acquisition_type enum: achievement, event, earned, grant, purchase
+- active boolean
+- metadata jsonb
+- created_at
 
 ### user_cosmetics
 
--   user_id UUID FK users
--   cosmetic_id UUID FK cosmetics
--   acquired_at timestamptz
--   acquisition_source text
--   PK(user_id, cosmetic_id)
+- user_id UUID FK users
+- cosmetic_id UUID FK cosmetics
+- acquired_at timestamptz
+- acquisition_source text
+- PK(user_id, cosmetic_id)
 
 ### cosmetic_equipment
 
--   user_id UUID PK/FK users
--   frame_id UUID nullable FK cosmetics
--   banner_id UUID nullable FK cosmetics
--   theme_id UUID nullable FK cosmetics
--   updated_at
+- user_id UUID PK/FK users
+- frame_id UUID nullable FK cosmetics
+- banner_id UUID nullable FK cosmetics
+- theme_id UUID nullable FK cosmetics
+- updated_at
 
 Validate that equipped cosmetic belongs to user and matches slot type.
 
@@ -1120,16 +1123,16 @@ Validate that equipped cosmetic belongs to user and matches slot type.
 
 ### assets
 
--   id UUID PK
--   owner_id UUID FK users
--   storage_key text UNIQUE
--   media_type text
--   size_bytes bigint
--   checksum text
--   width int nullable
--   height int nullable
--   status enum: pending, processing, ready, rejected
--   created_at
+- id UUID PK
+- owner_id UUID FK users
+- storage_key text UNIQUE
+- media_type text
+- size_bytes bigint
+- checksum text
+- width int nullable
+- height int nullable
+- status enum: pending, processing, ready, rejected
+- created_at
 
 Never accept arbitrary storage keys from clients. Generate them
 server-side. Store metadata, not binary blobs, in PostgreSQL.
@@ -1138,56 +1141,56 @@ server-side. Store metadata, not binary blobs, in PostgreSQL.
 
 ### notifications
 
--   id UUID PK
--   recipient_id UUID FK users
--   actor_id UUID nullable FK users
--   type text
--   entity_type text nullable
--   entity_id UUID nullable
--   payload_json jsonb
--   read_at timestamptz nullable
--   created_at
--   dedupe_key text nullable UNIQUE
+- id UUID PK
+- recipient_id UUID FK users
+- actor_id UUID nullable FK users
+- type text
+- entity_type text nullable
+- entity_id UUID nullable
+- payload_json jsonb
+- read_at timestamptz nullable
+- created_at
+- dedupe_key text nullable UNIQUE
 
 ### notification_preferences
 
--   user_id UUID PK/FK users
--   preferences_json jsonb
--   updated_at
+- user_id UUID PK/FK users
+- preferences_json jsonb
+- updated_at
 
 ### reports
 
--   id UUID PK
--   reporter_id UUID FK users
--   target_type text
--   target_id UUID
--   reason_code text
--   details text nullable
--   status enum: open, reviewing, actioned, dismissed
--   created_at, updated_at
+- id UUID PK
+- reporter_id UUID FK users
+- target_type text
+- target_id UUID
+- reason_code text
+- details text nullable
+- status enum: open, reviewing, actioned, dismissed
+- created_at, updated_at
 
 ### moderation_actions
 
--   id UUID PK
--   moderator_id UUID FK users
--   target_user_id UUID nullable FK users
--   target_type text
--   target_id UUID nullable
--   action_type text
--   reason text
--   expires_at timestamptz nullable
--   created_at
+- id UUID PK
+- moderator_id UUID FK users
+- target_user_id UUID nullable FK users
+- target_type text
+- target_id UUID nullable
+- action_type text
+- reason text
+- expires_at timestamptz nullable
+- created_at
 
 ### audit_logs
 
--   id UUID PK
--   actor_id UUID nullable FK users
--   action text
--   target_type text
--   target_id UUID nullable
--   request_id text nullable
--   metadata_json jsonb
--   created_at
+- id UUID PK
+- actor_id UUID nullable FK users
+- action text
+- target_type text
+- target_id UUID nullable
+- request_id text nullable
+- metadata_json jsonb
+- created_at
 
 Audit logs must not store passwords, raw tokens or unnecessary sensitive
 data.
@@ -1219,7 +1222,7 @@ reward operations. - Check constraints for positive file sizes, valid
 balances and sensible ranges. - Foreign keys with deliberate delete
 behavior; do not cascade-delete audit/ledger history.
 
-------------------------------------------------------------------------
+---
 
 # 7. API specification
 
@@ -1238,7 +1241,7 @@ version plan.
 
 Success:
 
-``` json
+```json
 {
   "data": {},
   "meta": {
@@ -1249,7 +1252,7 @@ Success:
 
 Paginated:
 
-``` json
+```json
 {
   "data": [],
   "page": {
@@ -1264,7 +1267,7 @@ Paginated:
 
 Error:
 
-``` json
+```json
 {
   "error": {
     "code": "VALIDATION_ERROR",
@@ -1279,100 +1282,100 @@ Never expose stack traces or internal database details.
 
 ## 7.2 Authentication
 
--   `POST /auth/register`
--   `POST /auth/login`
--   `POST /auth/logout`
--   `POST /auth/logout-all`
--   `POST /auth/verify-email`
--   `POST /auth/resend-verification`
--   `POST /auth/password/forgot`
--   `POST /auth/password/reset`
--   `GET /auth/providers`
--   `GET /auth/oauth/:provider/start`
--   `GET /auth/oauth/:provider/callback`
--   `GET /auth/sessions`
--   `DELETE /auth/sessions/:sessionId`
--   `POST /auth/accounts/:provider/link`
--   `DELETE /auth/accounts/:provider`
+- `POST /auth/register`
+- `POST /auth/login`
+- `POST /auth/logout`
+- `POST /auth/logout-all`
+- `POST /auth/verify-email`
+- `POST /auth/resend-verification`
+- `POST /auth/password/forgot`
+- `POST /auth/password/reset`
+- `GET /auth/providers`
+- `GET /auth/oauth/:provider/start`
+- `GET /auth/oauth/:provider/callback`
+- `GET /auth/sessions`
+- `DELETE /auth/sessions/:sessionId`
+- `POST /auth/accounts/:provider/link`
+- `DELETE /auth/accounts/:provider`
 
 OAuth start/callback must use state, nonce where applicable, PKCE,
 strict redirect URI allowlists and safe desktop callback handling.
 
 ## 7.3 Current user and profiles
 
--   `GET /me`
--   `PATCH /me`
--   `GET /users/:handle`
--   `PATCH /me/profile`
--   `GET /me/interests`
--   `PUT /me/interests`
--   `GET /users/:handle/followers` (P1)
--   `PUT /users/:handle/follow` (P1)
--   `DELETE /users/:handle/follow` (P1)
--   `POST /users/:handle/block`
--   `DELETE /users/:handle/block`
--   `POST /users/:handle/report`
+- `GET /me`
+- `PATCH /me`
+- `GET /users/:handle`
+- `PATCH /me/profile`
+- `GET /me/interests`
+- `PUT /me/interests`
+- `GET /users/:handle/followers` (P1)
+- `PUT /users/:handle/follow` (P1)
+- `DELETE /users/:handle/follow` (P1)
+- `POST /users/:handle/block`
+- `DELETE /users/:handle/block`
+- `POST /users/:handle/report`
 
 Never allow a client to update role, XP, reputation, verification status
 or moderation status through profile endpoints.
 
 ## 7.4 Topics and discovery
 
--   `GET /topics`
--   `GET /topics/:slug`
--   `GET /topics/:slug/feed`
--   `PUT /me/topics/:topicId/follow`
--   `DELETE /me/topics/:topicId/follow`
--   `GET /feed?mode=following|latest|recommended&cursor=...`
--   `GET /search?q=...&type=...&cursor=...`
+- `GET /topics`
+- `GET /topics/:slug`
+- `GET /topics/:slug/feed`
+- `PUT /me/topics/:topicId/follow`
+- `DELETE /me/topics/:topicId/follow`
+- `GET /feed?mode=following|latest|recommended&cursor=...`
+- `GET /search?q=...&type=...&cursor=...`
 
 Search must enforce visibility and block/mute policies before returning
 results.
 
 ## 7.5 Posts and comments
 
--   `POST /posts`
--   `GET /posts/:postId`
--   `PATCH /posts/:postId`
--   `DELETE /posts/:postId`
--   `GET /posts/:postId/comments`
--   `POST /posts/:postId/comments`
--   `PATCH /comments/:commentId`
--   `DELETE /comments/:commentId`
--   `PUT /posts/:postId/reactions`
--   `DELETE /posts/:postId/reactions/:reactionType`
--   `PUT /posts/:postId/bookmark`
--   `DELETE /posts/:postId/bookmark`
--   `POST /posts/:postId/report`
--   `POST /questions/:postId/accept/:commentId`
--   `DELETE /questions/:postId/accepted-answer`
+- `POST /posts`
+- `GET /posts/:postId`
+- `PATCH /posts/:postId`
+- `DELETE /posts/:postId`
+- `GET /posts/:postId/comments`
+- `POST /posts/:postId/comments`
+- `PATCH /comments/:commentId`
+- `DELETE /comments/:commentId`
+- `PUT /posts/:postId/reactions`
+- `DELETE /posts/:postId/reactions/:reactionType`
+- `PUT /posts/:postId/bookmark`
+- `DELETE /posts/:postId/bookmark`
+- `POST /posts/:postId/report`
+- `POST /questions/:postId/accept/:commentId`
+- `DELETE /questions/:postId/accepted-answer`
 
 Use authorization policies to ensure only the author can edit their
 content, with moderator override recorded in audit logs.
 
 ## 7.6 Blogs
 
--   `POST /articles`
--   `GET /articles/:slug`
--   `PATCH /articles/:articleId`
--   `POST /articles/:articleId/publish`
--   `POST /articles/:articleId/unpublish`
--   `GET /users/:handle/articles`
--   `GET /articles/:articleId/revisions`
--   `POST /articles/:articleId/report`
+- `POST /articles`
+- `GET /articles/:slug`
+- `PATCH /articles/:articleId`
+- `POST /articles/:articleId/publish`
+- `POST /articles/:articleId/unpublish`
+- `GET /users/:handle/articles`
+- `GET /articles/:articleId/revisions`
+- `POST /articles/:articleId/report`
 
 Drafts are private to the author and authorized collaborators.
 
 ## 7.7 Ideas
 
--   `POST /ideas`
--   `GET /ideas/:ideaId`
--   `PATCH /ideas/:ideaId`
--   `POST /ideas/:ideaId/status`
--   `POST /ideas/:ideaId/collaborators`
--   `POST /ideas/:ideaId/collaboration-requests`
--   `GET /ideas/:ideaId/updates`
--   `POST /ideas/:ideaId/updates`
+- `POST /ideas`
+- `GET /ideas/:ideaId`
+- `PATCH /ideas/:ideaId`
+- `POST /ideas/:ideaId/status`
+- `POST /ideas/:ideaId/collaborators`
+- `POST /ideas/:ideaId/collaboration-requests`
+- `GET /ideas/:ideaId/updates`
+- `POST /ideas/:ideaId/updates`
 
 Only authorized owners/collaborators can update private idea details.
 Public idea status transitions must be validated.
@@ -1392,12 +1395,12 @@ desktop client.
 
 ## 7.9 Cosmetics and assets
 
--   `GET /cosmetics`
--   `GET /me/cosmetics`
--   `PUT /me/cosmetics/equip`
--   `POST /assets/upload-intents`
--   `POST /assets/:assetId/complete`
--   `GET /assets/:assetId`
+- `GET /cosmetics`
+- `GET /me/cosmetics`
+- `PUT /me/cosmetics/equip`
+- `POST /assets/upload-intents`
+- `POST /assets/:assetId/complete`
+- `GET /assets/:assetId`
 
 Upload flow: 1. Authenticated client requests an upload intent with
 declared type and size. 2. API validates policy and issues a short-lived
@@ -1407,42 +1410,42 @@ completion triggers file verification/processing. 5. Asset becomes
 
 ## 7.10 Notifications
 
--   `GET /me/notifications`
--   `POST /me/notifications/:id/read`
--   `POST /me/notifications/read-all`
--   `GET /me/notification-preferences`
--   `PATCH /me/notification-preferences`
+- `GET /me/notifications`
+- `POST /me/notifications/:id/read`
+- `POST /me/notifications/read-all`
+- `GET /me/notification-preferences`
+- `PATCH /me/notification-preferences`
 
 ## 7.11 Moderation/admin
 
--   `POST /reports`
--   `GET /admin/reports`
--   `GET /admin/reports/:reportId`
--   `POST /admin/reports/:reportId/decision`
--   `POST /admin/users/:userId/suspend`
--   `POST /admin/users/:userId/ban`
--   `POST /admin/content/:contentId/hide`
--   `GET /admin/audit-logs`
+- `POST /reports`
+- `GET /admin/reports`
+- `GET /admin/reports/:reportId`
+- `POST /admin/reports/:reportId/decision`
+- `POST /admin/users/:userId/suspend`
+- `POST /admin/users/:userId/ban`
+- `POST /admin/content/:contentId/hide`
+- `GET /admin/audit-logs`
 
 Every admin endpoint requires explicit permission checks, audit logging
 and reason capture.
 
 ## 7.12 API conventions
 
--   Validate request body, path and query parameters.
--   Use `Idempotency-Key` for operations that create rewards, purchases,
-    registrations or other retry-sensitive side effects.
--   Apply request IDs and structured logs.
--   Use optimistic concurrency/version fields for edits where
-    appropriate.
--   Return `401` unauthenticated, `403` unauthorized, `404` for
-    inaccessible resources where disclosure is unsafe, `409` conflicts,
-    `422` validation/domain errors, `429` rate limits.
--   Generate OpenAPI from controllers and DTOs; commit generated client
-    types or generate them in CI.
--   Add contract tests for critical endpoints.
+- Validate request body, path and query parameters.
+- Use `Idempotency-Key` for operations that create rewards, purchases,
+  registrations or other retry-sensitive side effects.
+- Apply request IDs and structured logs.
+- Use optimistic concurrency/version fields for edits where
+  appropriate.
+- Return `401` unauthenticated, `403` unauthorized, `404` for
+  inaccessible resources where disclosure is unsafe, `409` conflicts,
+  `422` validation/domain errors, `429` rate limits.
+- Generate OpenAPI from controllers and DTOs; commit generated client
+  types or generate them in CI.
+- Add contract tests for critical endpoints.
 
-------------------------------------------------------------------------
+---
 
 # 8. Domain events and background jobs
 
@@ -1463,7 +1466,7 @@ Expired token/session cleanup. - Data export and deletion jobs.
 Jobs must be idempotent, observable and bounded. Failed jobs go to a
 dead-letter workflow with safe replay controls.
 
-------------------------------------------------------------------------
+---
 
 # 9. Testing and quality gates
 
@@ -1497,7 +1500,7 @@ Database migrations are reversible or have a documented recovery plan. -
 Desktop build works on the declared development platform. - No unrelated
 functionality regresses.
 
-------------------------------------------------------------------------
+---
 
 # 10. Milestones and delivery plan
 
@@ -1567,7 +1570,7 @@ Deliver: - Events, resources, Academy. - Messaging. - Web client. -
 Public API and integrations. - Mobile client assessment. Exit criteria:
 expansion is driven by real user needs and operational capacity.
 
-------------------------------------------------------------------------
+---
 
 # 11. Coding-agent instructions
 
@@ -1602,101 +1605,100 @@ change product scope.
 
 Before completion: 1. Run formatter and lint. 2. Run typecheck. 3. Run
 affected unit and integration tests. 4. Run desktop build or explain why
-it cannot run. 5. Inspect `git diff` for unrelated changes and secrets.
-6. Summarize files changed, behavior delivered, tests run, known
+it cannot run. 5. Inspect `git diff` for unrelated changes and secrets. 6. Summarize files changed, behavior delivered, tests run, known
 limitations and next steps.
 
 ## 11.3 Architecture rules
 
--   Desktop is a client, never the authority for permissions, XP,
-    currency or moderation.
--   API is the source of truth for user identity and domain state.
--   Use PostgreSQL transactions for multi-row business invariants.
--   XP and currency are ledger-based and append-only.
--   All reward operations require idempotency.
--   Never trust client-provided user IDs for ownership.
--   Never trust client-provided XP, role, verification or moderation
-    values.
--   Use UTC timestamps.
--   Use cursor pagination for feeds and large lists.
--   Avoid N+1 queries.
--   Avoid generic abstractions before two or more real use cases justify
-    them.
--   Do not introduce microservices without an approved ADR.
--   Do not add dependencies without explaining why they are needed.
--   Do not run arbitrary user code in the API or ordinary worker.
--   Do not store binary uploads in PostgreSQL.
--   Never log secrets, passwords, access tokens or reset tokens.
+- Desktop is a client, never the authority for permissions, XP,
+  currency or moderation.
+- API is the source of truth for user identity and domain state.
+- Use PostgreSQL transactions for multi-row business invariants.
+- XP and currency are ledger-based and append-only.
+- All reward operations require idempotency.
+- Never trust client-provided user IDs for ownership.
+- Never trust client-provided XP, role, verification or moderation
+  values.
+- Use UTC timestamps.
+- Use cursor pagination for feeds and large lists.
+- Avoid N+1 queries.
+- Avoid generic abstractions before two or more real use cases justify
+  them.
+- Do not introduce microservices without an approved ADR.
+- Do not add dependencies without explaining why they are needed.
+- Do not run arbitrary user code in the API or ordinary worker.
+- Do not store binary uploads in PostgreSQL.
+- Never log secrets, passwords, access tokens or reset tokens.
 
 ## 11.4 Frontend rules
 
--   Use feature-oriented folders.
--   Use shared design tokens and UI primitives.
--   Handle loading, empty, error and offline states.
--   Use semantic controls and keyboard-accessible interactions.
--   Respect reduced motion.
--   Keep server state in TanStack Query.
--   Keep local UI state local.
--   Do not create fake functionality or dead buttons.
--   Avoid giant components; split by responsibility.
--   Never put authorization logic solely in the UI.
+- Use feature-oriented folders.
+- Use shared design tokens and UI primitives.
+- Handle loading, empty, error and offline states.
+- Use semantic controls and keyboard-accessible interactions.
+- Respect reduced motion.
+- Keep server state in TanStack Query.
+- Keep local UI state local.
+- Do not create fake functionality or dead buttons.
+- Avoid giant components; split by responsibility.
+- Never put authorization logic solely in the UI.
 
 ## 11.5 Backend rules
 
--   Controllers are thin.
--   DTO/schema validation is mandatory.
--   Domain services own business rules.
--   Permission checks are explicit and tested.
--   Use transactions for rewards, account linking and state transitions.
--   Emit domain events through an outbox where durability matters.
--   Use structured logs and request IDs.
--   Return consistent error objects.
--   Avoid leaking whether private resources exist where that could
-    disclose information.
+- Controllers are thin.
+- DTO/schema validation is mandatory.
+- Domain services own business rules.
+- Permission checks are explicit and tested.
+- Use transactions for rewards, account linking and state transitions.
+- Emit domain events through an outbox where durability matters.
+- Use structured logs and request IDs.
+- Return consistent error objects.
+- Avoid leaking whether private resources exist where that could
+  disclose information.
 
 ## 11.6 Database rules
 
--   Every schema change uses a migration.
--   Do not edit an applied migration.
--   Review generated SQL.
--   Add indexes based on query patterns.
--   Use foreign keys and deliberate delete policies.
--   Never cascade-delete financial/reputation ledgers or audit records.
--   Provide seed data only for development/demo.
--   Never put production user data in fixtures.
--   Include a migration rollback or forward-recovery note.
+- Every schema change uses a migration.
+- Do not edit an applied migration.
+- Review generated SQL.
+- Add indexes based on query patterns.
+- Use foreign keys and deliberate delete policies.
+- Never cascade-delete financial/reputation ledgers or audit records.
+- Provide seed data only for development/demo.
+- Never put production user data in fixtures.
+- Include a migration rollback or forward-recovery note.
 
 ## 11.7 Security rules
 
--   Treat all user content, uploads, URLs and external provider data as
-    untrusted.
--   Sanitize rendered Markdown and HTML.
--   Protect OAuth with state, PKCE and strict redirect allowlists.
--   Apply rate limits to auth, search, content creation, reactions and
-    reports.
--   Validate upload signatures and enforce size limits.
--   Use least-privilege Tauri capabilities.
--   Never expose backend secrets in the desktop binary.
--   Do not claim a sandbox is secure without a documented threat model
-    and review.
--   Report security concerns rather than implementing a workaround that
-    weakens controls.
+- Treat all user content, uploads, URLs and external provider data as
+  untrusted.
+- Sanitize rendered Markdown and HTML.
+- Protect OAuth with state, PKCE and strict redirect allowlists.
+- Apply rate limits to auth, search, content creation, reactions and
+  reports.
+- Validate upload signatures and enforce size limits.
+- Use least-privilege Tauri capabilities.
+- Never expose backend secrets in the desktop binary.
+- Do not claim a sandbox is secure without a documented threat model
+  and review.
+- Report security concerns rather than implementing a workaround that
+  weakens controls.
 
 ## 11.8 Git and delivery rules
 
--   Use conventional commits.
--   Keep pull requests focused.
--   Do not force-push shared branches.
--   Do not rewrite user changes.
--   Do not delete tests to make CI pass.
--   Do not suppress TypeScript errors with `any`, `@ts-ignore` or broad
-    eslint disables without a documented reason.
--   Do not claim tests passed unless they were actually run.
--   Record significant architectural choices in `docs/decisions/`.
+- Use conventional commits.
+- Keep pull requests focused.
+- Do not force-push shared branches.
+- Do not rewrite user changes.
+- Do not delete tests to make CI pass.
+- Do not suppress TypeScript errors with `any`, `@ts-ignore` or broad
+  eslint disables without a documented reason.
+- Do not claim tests passed unless they were actually run.
+- Record significant architectural choices in `docs/decisions/`.
 
 ## 11.9 Required agent completion report
 
-``` text
+```text
 ## Implemented
 - ...
 
@@ -1726,7 +1728,7 @@ limitations and next steps.
 - ...
 ```
 
-------------------------------------------------------------------------
+---
 
 # 12. Suggested initial development prompts
 
@@ -1786,7 +1788,7 @@ observability, backup/restore documentation, installer/update checks,
 accessibility review, security tests and operational runbooks. Do not
 add new social modules.
 
-------------------------------------------------------------------------
+---
 
 # 13. Release and operational requirements
 
@@ -1810,7 +1812,7 @@ which services are part of the open-source core and which belong to the
 official hosted service. - Do not imply that user-generated content is
 automatically licensed under the software license.
 
-------------------------------------------------------------------------
+---
 
 # 14. Final implementation order
 
@@ -1835,23 +1837,23 @@ microservices just because the long-term vision mentions them.**
 Build a reliable foundation, then ship one coherent capability at a
 time.
 
-------------------------------------------------------------------------
+---
 
 # 15. Initial project acceptance checklist
 
--   [ ] Product name and tagline are consistent.
--   [ ] Open-source licensing decision is documented.
--   [ ] Repository contains PRD and `AGENTS.md`.
--   [ ] Monorepo installs from a clean checkout.
--   [ ] Desktop shell launches.
--   [ ] API health endpoint responds.
--   [ ] Worker starts and shuts down cleanly.
--   [ ] PostgreSQL migrations run.
--   [ ] Redis connection works.
--   [ ] CI runs lint, typecheck and tests.
--   [ ] `.env.example` contains no real secrets.
--   [ ] Local setup instructions are verified.
--   [ ] M0 exit criteria are met.
+- [ ] Product name and tagline are consistent.
+- [ ] Open-source licensing decision is documented.
+- [ ] Repository contains PRD and `AGENTS.md`.
+- [ ] Monorepo installs from a clean checkout.
+- [ ] Desktop shell launches.
+- [ ] API health endpoint responds.
+- [ ] Worker starts and shuts down cleanly.
+- [ ] PostgreSQL migrations run.
+- [ ] Redis connection works.
+- [ ] CI runs lint, typecheck and tests.
+- [ ] `.env.example` contains no real secrets.
+- [ ] Local setup instructions are verified.
+- [ ] M0 exit criteria are met.
 
 **Product promise:** NerdHub is a home for people who are curious enough
 to ask, brave enough to experiment, generous enough to share, and

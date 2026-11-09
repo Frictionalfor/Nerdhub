@@ -7,6 +7,7 @@ Do not disclose exploitable vulnerabilities in public issues or discussions.
 Until a dedicated private security contact is published, use the repository host's private vulnerability reporting feature if enabled. If it is not enabled, contact the maintainers through a verified private channel listed in the repository profile. Do not include secrets or real user data in a report.
 
 Please include:
+
 - Affected component and version/commit.
 - Impact and realistic attack scenario.
 - Reproduction steps or proof of concept.

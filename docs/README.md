@@ -1,6 +1,7 @@
 # Documentation Index
 
 Start with the root `README.md`, then read:
+
 1. `AGENTS.md` for coding rules.
 2. `docs/product/MVP.md` for first-release scope.
 3. `docs/architecture/ARCHITECTURE.md` for system boundaries.

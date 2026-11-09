@@ -30,21 +30,21 @@ NerdHub is a cross-disciplinary ecosystem where people can ask, explore, publish
 
 ## Core product areas
 
-| Area | Purpose | Initial priority |
-|---|---|---|
-| Identity and profiles | Account, identity, interests, customization | P0 |
-| Topics and discovery | Taxonomy, following, search and feeds | P0 |
-| Community content | Discussions, questions, ideas, comments | P0 |
-| Publishing | Long-form articles/blogs | P0 |
-| Idea Lab | Track ideas, updates and collaborators | P0 |
-| Reputation and progression | XP, achievements, leaderboards | P0/P1 |
-| Cosmetics | Frames, banners, themes and decorations | P1 |
-| Notifications | Useful in-app updates | P1 |
-| Projects and clubs | Collaboration and specialist groups | P1 |
-| Challenges | Structured learning/creation activities | P1 |
-| Opportunities and events | Discover collaboration and events | P2 |
-| Academy/resources | Curated learning and reference material | P2 |
-| Messaging | Private conversations | P2 |
+| Area                       | Purpose                                     | Initial priority |
+| -------------------------- | ------------------------------------------- | ---------------- |
+| Identity and profiles      | Account, identity, interests, customization | P0               |
+| Topics and discovery       | Taxonomy, following, search and feeds       | P0               |
+| Community content          | Discussions, questions, ideas, comments     | P0               |
+| Publishing                 | Long-form articles/blogs                    | P0               |
+| Idea Lab                   | Track ideas, updates and collaborators      | P0               |
+| Reputation and progression | XP, achievements, leaderboards              | P0/P1            |
+| Cosmetics                  | Frames, banners, themes and decorations     | P1               |
+| Notifications              | Useful in-app updates                       | P1               |
+| Projects and clubs         | Collaboration and specialist groups         | P1               |
+| Challenges                 | Structured learning/creation activities     | P1               |
+| Opportunities and events   | Discover collaboration and events           | P2               |
+| Academy/resources          | Curated learning and reference material     | P2               |
+| Messaging                  | Private conversations                       | P2               |
 
 ## Content types
 
@@ -98,6 +98,7 @@ Every content type needs ownership, timestamps, visibility rules, moderation/rep
 ## Success metrics
 
 Measure meaningful contribution, quality, safety, accessibility and reliability:
+
 - Onboarding completion and first meaningful contribution.
 - Time to first useful answer.
 - Questions receiving accepted/useful responses.

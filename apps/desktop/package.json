@@ -1,0 +1,38 @@
+{
+  "name": "@nerdhub/desktop",
+  "version": "0.0.0-m0",
+  "private": true,
+  "description": "NerdHub desktop shell — Tauri 2 + React + TypeScript + Vite.",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@nerdhub/api-client": "workspace:*",
+    "@nerdhub/contracts": "workspace:*",
+    "@tailwindcss/vite": "^4.3.5",
+    "@tauri-apps/api": "^2.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@nerdhub/config": "workspace:*",
+    "@tauri-apps/cli": "^2.0.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "eslint": "^9.20.0",
+    "jsdom": "^25.0.0",
+    "typescript": "~5.8.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}

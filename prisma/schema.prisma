@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/*
+ * NerdHub M0 initial schema foundation.
+ *
+ * This is deliberately minimal. Only the core identity foundation (`users`)
+ * is created here. Every future domain table (topics, posts, profiles,
+ * etc.) is added in its own milestone via a new Prisma migration. Do not
+ * create every future product table prematurely.
+ *
+ * Conventions (docs/architecture/DATA_MODEL.md):
+ * - UUID primary keys
+ * - TIMESTAMPTZ for persisted timestamps (UTC)
+ * - Case-insensitive unique email via citext
+ */
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique @db.Citext
+  status    String   @default("pending")
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
+
+  @@map("users")
+}

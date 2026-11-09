@@ -27,6 +27,7 @@ Do not document these as available until scripts exist. Add them during M0 and k
 ## Pull request review
 
 Review:
+
 - Correctness and edge cases.
 - Authorization and object ownership.
 - Data integrity and migrations.
@@ -48,6 +49,7 @@ Review:
 ## Dependency changes
 
 Before adding a dependency:
+
 - Confirm it is actively maintained.
 - Check license and known vulnerabilities.
 - Consider bundle/runtime size.

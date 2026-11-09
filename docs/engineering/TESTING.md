@@ -3,7 +3,9 @@
 ## Testing pyramid
 
 ### Unit tests
+
 Test domain rules, validation, pure functions and state transitions. Examples:
+
 - XP award policy and caps.
 - Topic hierarchy validation.
 - Handle normalization.
@@ -11,13 +13,17 @@ Test domain rules, validation, pure functions and state transitions. Examples:
 - Cursor encoding/decoding.
 
 ### Integration tests
+
 Test database constraints, transactions, repositories, API modules, storage adapters and queue handlers against controlled dependencies.
 
 ### Contract tests
+
 Validate API request/response schemas against OpenAPI. Detect accidental breaking changes.
 
 ### End-to-end tests
+
 Cover critical journeys:
+
 - Register/sign in and complete onboarding.
 - Follow a topic and create a post.
 - Comment/react/bookmark.
@@ -26,6 +32,7 @@ Cover critical journeys:
 - View progress and equip an owned cosmetic.
 
 ### Desktop tests
+
 Test deep links, offline/error behavior, window lifecycle, secure storage boundaries and packaged builds on supported operating systems.
 
 ## Security-focused tests
