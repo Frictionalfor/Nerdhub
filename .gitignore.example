@@ -1,0 +1,16 @@
+# Copy/merge into the root .gitignore during M0
+node_modules/
+.pnpm-store/
+.turbo/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+target/
+src-tauri/target/
+*.sqlite
+*.db
