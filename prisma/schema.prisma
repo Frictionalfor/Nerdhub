@@ -8,12 +8,15 @@ datasource db {
 }
 
 /*
- * NerdHub M0 initial schema foundation.
+ * NerdHub schema foundation.
  *
- * This is deliberately minimal. Only the core identity foundation (`users`)
- * is created here. Every future domain table (topics, posts, profiles,
- * etc.) is added in its own milestone via a new Prisma migration. Do not
- * create every future product table prematurely.
+ * M0: core identity foundation (`users`).
+ * M1: identity models (credentials, OAuth, sessions, auth tokens, profiles,
+ *     onboarding, interests, security events, outbox events).
+ *
+ * Every future domain table (topics, posts, ...) is added in its own milestone
+ * via a new Prisma migration. Do not create every future product table
+ * prematurely.
  *
  * Conventions (docs/architecture/DATA_MODEL.md):
  * - UUID primary keys
@@ -22,11 +25,182 @@ datasource db {
  */
 
 model User {
-  id        String   @id @default(uuid()) @db.Uuid
-  email     String   @unique @db.Citext
-  status    String   @default("pending")
-  createdAt DateTime @default(now()) @db.Timestamptz
-  updatedAt DateTime @updatedAt @db.Timestamptz
+  id                 String                 @id @default(uuid()) @db.Uuid
+  email              String                 @unique @db.Citext
+  status             String                 @default("pending")
+  emailVerified      Boolean                @default(false)
+  emailVerifiedAt    DateTime?              @db.Timestamptz
+  createdAt          DateTime               @default(now()) @db.Timestamptz
+  updatedAt          DateTime               @updatedAt @db.Timestamptz
+
+  passwordCredential PasswordCredential?    @relation("UserPasswordCredential")
+  oauthAccounts      OAuthAccount[]         @relation("UserOAuthAccount")
+  sessions           Session[]              @relation("UserSession")
+  authTokens         AuthToken[]            @relation("UserAuthToken")
+  profile            Profile?               @relation("UserProfile")
+  onboardingProgress OnboardingProgress?    @relation("UserOnboardingProgress")
+  securityEvents     SecurityEvent[]        @relation("UserSecurityEvent")
 
   @@map("users")
+}
+
+/**
+ * Decoupled password credential store (physically separated from users).
+ * Password hashes are Argon2id PHC strings; plaintext is never persisted.
+ */
+model PasswordCredential {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @db.Uuid
+  user        User     @relation("UserPasswordCredential", fields: [userId], references: [id], onDelete: Cascade)
+  passwordHash String
+  createdAt   DateTime @default(now()) @db.Timestamptz
+  updatedAt   DateTime @updatedAt @db.Timestamptz
+
+  @@unique([userId])
+  @@map("password_credentials")
+}
+
+/**
+ * Federated provider links. Uniqueness is enforced on (provider, providerSubject)
+ * so an external identity maps to exactly one user account (prevents pre-hijacking).
+ */
+model OAuthAccount {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @db.Uuid
+  user           User     @relation("UserOAuthAccount", fields: [userId], references: [id], onDelete: Cascade)
+  provider       String
+  providerSubject String
+  providerEmail  String?
+  createdAt      DateTime @default(now()) @db.Timestamptz
+
+  @@unique([provider, providerSubject])
+  @@map("oauth_accounts")
+}
+
+/**
+ * Session families & refresh tokens. One row per active refresh-token family.
+ * refreshTokenHash is a SHA-256 digest (never plaintext).
+ */
+model Session {
+  id               String   @id @default(uuid()) @db.Uuid
+  userId           String   @db.Uuid
+  user             User     @relation("UserSession", fields: [userId], references: [id], onDelete: Cascade)
+  familyId         String   @db.Uuid
+  refreshTokenHash String   @unique @db.Char(64)
+  sessionVersion   Int      @default(1)
+  userAgent        String?
+  ipAddress        String?
+  expiresAt        DateTime @db.Timestamptz
+  absoluteExpiresAt DateTime @db.Timestamptz
+  revokedAt        DateTime? @db.Timestamptz
+  revocationReason String?
+  createdAt        DateTime @default(now()) @db.Timestamptz
+  lastUsedAt       DateTime @default(now()) @db.Timestamptz
+
+  @@map("sessions")
+}
+
+/**
+ * Hashed one-time verification / password-reset tokens (single-use).
+ * tokenHash is a SHA-256 digest; plaintext is never persisted.
+ */
+model AuthToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  user      User     @relation("UserAuthToken", fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique @db.Char(64)
+  purpose   String
+  expiresAt DateTime @db.Timestamptz
+  consumedAt DateTime? @db.Timestamptz
+  createdAt DateTime @default(now()) @db.Timestamptz
+
+  @@map("auth_tokens")
+}
+
+/**
+ * Public identity (profile). Handle is unique and immutable during M1.
+ */
+model Profile {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid @unique
+  user       User     @relation("UserProfile", fields: [userId], references: [id], onDelete: Cascade)
+  handle     String   @unique
+  displayName String
+  bio        String?
+  avatarUrl  String?
+  createdAt  DateTime @default(now()) @db.Timestamptz
+  updatedAt  DateTime @updatedAt @db.Timestamptz
+
+  @@map("profiles")
+}
+
+/**
+ * Server-authoritative onboarding state machine.
+ */
+model OnboardingProgress {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  user       User     @relation("UserOnboardingProgress", fields: [userId], references: [id], onDelete: Cascade)
+  currentStep String @default("PROFILE")
+  completed  Boolean  @default(false)
+  completedAt DateTime? @db.Timestamptz
+  updatedAt  DateTime @updatedAt @db.Timestamptz
+
+  @@unique([userId])
+  @@map("onboarding_progress")
+}
+
+/**
+ * Curated interest catalogue.
+ */
+model InterestCatalog {
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique
+  name      String
+  category  String
+  sortOrder Int
+
+  @@map("interest_catalog")
+}
+
+/**
+ * User-selected interests (N:M join table).
+ */
+model UserInterest {
+  userId     String @db.Uuid
+  interestId String @db.Uuid
+  createdAt  DateTime @default(now()) @db.Timestamptz
+
+  @@id([userId, interestId])
+  @@map("user_interests")
+}
+
+/**
+ * Append-only security audit log.
+ */
+model SecurityEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @db.Uuid
+  user      User?    @relation("UserSecurityEvent", fields: [userId], references: [id], onDelete: SetNull)
+  eventType String
+  ipAddress String?
+  userAgent String?
+  metadata  Json?
+  createdAt DateTime @default(now()) @db.Timestamptz
+
+  @@map("security_events")
+}
+
+/**
+ * Transactional outbox for reliable event dispatch (e.g. email delivery).
+ */
+model OutboxEvent {
+  id         String   @id @default(uuid()) @db.Uuid
+  eventType  String
+  payload    String
+  status     String
+  createdAt  DateTime @default(now()) @db.Timestamptz
+  processedAt DateTime? @db.Timestamptz
+
+  @@map("outbox_events")
 }

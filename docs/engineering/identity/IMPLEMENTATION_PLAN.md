@@ -1,9 +1,9 @@
 # M1 Identity & Onboarding — Implementation Plan
 
-> **Document Status:** PROPOSED — NOT IMPLEMENTED
+> **Document Status:** AUTHORIZED — IN PROGRESS
 > **Milestone:** M1 — Identity and Onboarding
-> **Prerequisites:** Project owner approval of Decisions M1-P-01 through M1-P-04; ADR 0008 marked Accepted.
-> **Last Updated:** 2026-11-09
+> **Prerequisites:** Project owner approval of Decisions M1-P-01 through M1-P-04 (ACCEPTED 2026-11-10); ADR 0008 marked Accepted (2026-11-10). Both prerequisites satisfied.
+> **Last Updated:** 2026-11-10
 
 ---
 

@@ -1,26 +1,26 @@
 # M1 Identity & Onboarding — Product Decision Register
 
-> **Document Status:** PENDING OWNER APPROVAL
+> **Document Status:** APPROVED
 > **Milestone:** M1 — Identity and Onboarding
-> **Last Updated:** 2026-11-09
-> **Notice:** All decisions below are proposed defaults pending explicit project owner approval. Do not treat any recommendation as settled until the owner marks it ACCEPTED.
+> **Last Updated:** 2026-11-10
+> **Notice:** All decisions below were explicitly approved by the project owner on 2026-11-10. These recommendations are now settled and govern M1 implementation.
 
 ---
 
 ## Decision Status Summary
 
-| Decision ID | Area                       | Proposed Default                                                                         | Status                     |
-| :---------- | :------------------------- | :--------------------------------------------------------------------------------------- | :------------------------- |
-| **M1-P-01** | Email Verification Gating  | Login and browsing permitted; public posting and community actions gated until verified. | **PENDING OWNER APPROVAL** |
-| **M1-P-02** | OAuth Account Provisioning | Auto-provision only with verified provider email; never auto-link on email match.        | **PENDING OWNER APPROVAL** |
-| **M1-P-03** | Session Lifetimes          | 15m access token; 30d idle refresh lifetime; 90d absolute session maximum.               | **PENDING OWNER APPROVAL** |
-| **M1-P-04** | Username / Handle Policy   | Normalized lowercase ASCII `^[a-z0-9_]{3,30}$`; immutable during M1.                     | **PENDING OWNER APPROVAL** |
+| Decision ID | Area                       | Proposed Default                                                                         | Status                    |
+| :---------- | :------------------------- | :--------------------------------------------------------------------------------------- | :------------------------ |
+| **M1-P-01** | Email Verification Gating  | Login and browsing permitted; public posting and community actions gated until verified. | **ACCEPTED (2026-11-10)** |
+| **M1-P-02** | OAuth Account Provisioning | Auto-provision only with verified provider email; never auto-link on email match.        | **ACCEPTED (2026-11-10)** |
+| **M1-P-03** | Session Lifetimes          | 15m access token; 30d idle refresh lifetime; 90d absolute session maximum.               | **ACCEPTED (2026-11-10)** |
+| **M1-P-04** | Username / Handle Policy   | Normalized lowercase ASCII `^[a-z0-9_]{3,30}$`; immutable during M1.                     | **ACCEPTED (2026-11-10)** |
 
 ---
 
 ## Decision M1-P-01 — Email Verification Gating
 
-### Recommendation (Pending Owner Approval)
+### Decision (Approved by Project Owner — 2026-11-10)
 
 - **Permitted Prior to Verification:** Account login, profile viewing/setup, topic browsing, and read-only consumption of public discussions.
 - **Gated Until Verified:** Public posting, commenting, voting/reactions, direct messaging, topic creation, and idea submissions strictly require email verification.
@@ -44,7 +44,7 @@
 
 ## Decision M1-P-02 — OAuth Account Provisioning & Linking
 
-### Recommendation (Pending Owner Approval)
+### Decision (Approved by Project Owner — 2026-11-10)
 
 - **Auto-Provisioning:** User accounts are automatically provisioned upon external OAuth authentication **only when the provider supplies a cryptographically verified email address**.
 - **Provider Account Anchor:** External identities are mapped strictly by `(issuer, subject)` (e.g. `(github, numeric_id)`, `(google, sub)`).
@@ -67,7 +67,7 @@
 
 ## Decision M1-P-03 — Session Lifetimes & Revocation
 
-### Recommendation (Pending Owner Approval)
+### Decision (Approved by Project Owner — 2026-11-10)
 
 - **Access Token Lifetime:** 15 minutes (stateless signed JWT).
 - **Refresh Token Idle Lifetime:** 30 days (sliding expiration).
@@ -94,7 +94,7 @@
 
 ## Decision M1-P-04 — Username / Handle Policy
 
-### Recommendation (Pending Owner Approval)
+### Decision (Approved by Project Owner — 2026-11-10)
 
 - **Format Regex:** Lowercase ASCII `^[a-z0-9_]{3,30}$`.
 - **Normalization:** Normalized to lowercase on input; case-insensitive uniqueness enforced via database index.
