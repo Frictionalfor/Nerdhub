@@ -1,6 +1,6 @@
 # GitHub Copilot instructions for NerdHub
 
-Follow the canonical repository rules in `/AGENTS.md` and the relevant documentation under `/docs`.
+Follow the canonical repository rules in `/AGENTS.md`, including the AI contributor attribution policy, and the relevant documentation under `/docs`. Do not add AI co-author trailers unless the agent's identity and associated email are verified and it materially contributed.
 
 ## Core rules
 

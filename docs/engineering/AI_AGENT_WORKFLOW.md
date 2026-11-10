@@ -14,6 +14,8 @@ Use multiple AI tools without creating conflicting implementations, inconsistent
 
 If an agent instruction conflicts with an accepted ADR or `AGENTS.md`, follow the repository source of truth and report the conflict.
 
+AI contributor attribution is governed by `AGENTS.md`. Use `Co-authored-by` only for verified, material contributions; do not attribute review-only or autocomplete-only work. When an agent materially contributes, identify that contribution in the PR or issue and follow the verification requirements in `AGENTS.md`.
+
 ## Recommended division of labor
 
 | Tool              | Best-fit role                                                                         | Guardrail                                                                            |
