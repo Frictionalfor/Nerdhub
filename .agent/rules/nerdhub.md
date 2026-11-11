@@ -2,6 +2,7 @@
 
 Read `/AGENTS.md` before implementation. It is the canonical source of truth.
 
+- Follow the AI contributor attribution policy in `/AGENTS.md`; use co-author trailers only for verified, material contributions.
 - Follow `/README.md`, `/docs/` and accepted ADRs.
 - Inspect `git status` and existing code before edits.
 - Work on one bounded task with explicit acceptance criteria.

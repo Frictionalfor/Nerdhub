@@ -113,6 +113,17 @@ Do not create fake generated documentation. Mark generated artifacts as generate
 - Do not commit unless asked.
 - Never commit `.env`, credentials, tokens, certificates or local databases.
 
+## AI contributor attribution
+
+- The human repository owner remains the primary author and committer.
+- Add a `Co-authored-by` trailer for an AI agent only when that agent made a material contribution included in the commit, such as substantive code, tests, documentation or architecture work.
+- Read-only reviews, ordinary autocomplete and inline suggestions alone do not qualify for co-author attribution.
+- Attribute only the specific agents that materially contributed; never add every agent by default.
+- Before recommending a trailer, verify the agent's GitHub identity and an email address associated with that account. Never infer or invent a username, identity or email.
+- If an agent identity or associated email cannot be verified, omit the trailer. When useful, document the agent's contribution in the pull request or issue instead.
+- Keep the human repository owner as author and committer; agent attribution does not replace either identity.
+- Do not retroactively rewrite historical commits to add AI attribution.
+
 ## 10. Definition of done
 
 A task is complete only when:

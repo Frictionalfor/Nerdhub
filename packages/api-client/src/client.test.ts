@@ -168,4 +168,98 @@ describe('NerdHubApiClient', () => {
     expect(call[1]?.method).toBe('DELETE');
     expect(call[1]?.headers?.['Content-Type']).toBeUndefined();
   });
+
+  describe('envelope parsing edge cases', () => {
+    it('correctly returns null when envelope has data: null', async () => {
+      installFetchMock(
+        new Response(JSON.stringify({ data: null, meta: { requestId: 'req-null' } }), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'req-null' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<null>('/health');
+
+      expect(result.data).toBeNull();
+      expect(result.meta.requestId).toBe('req-null');
+    });
+
+    it('correctly returns false when envelope has data: false', async () => {
+      installFetchMock(
+        new Response(JSON.stringify({ data: false, meta: { requestId: 'req-false' } }), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'req-false' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<boolean>('/flags/active');
+
+      expect(result.data).toBe(false);
+      expect(result.meta.requestId).toBe('req-false');
+    });
+
+    it('correctly returns 0 when envelope has data: 0', async () => {
+      installFetchMock(
+        new Response(JSON.stringify({ data: 0, meta: { requestId: 'req-zero' } }), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'req-zero' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<number>('/counts/unread');
+
+      expect(result.data).toBe(0);
+      expect(result.meta.requestId).toBe('req-zero');
+    });
+
+    it('correctly returns empty string when envelope has data: ""', async () => {
+      installFetchMock(
+        new Response(JSON.stringify({ data: '', meta: { requestId: 'req-empty' } }), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'req-empty' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<string>('/status/message');
+
+      expect(result.data).toBe('');
+      expect(result.meta.requestId).toBe('req-empty');
+    });
+
+    it('returns raw body as data for ordinary non-envelope objects', async () => {
+      const rawPayload = { id: 'item-1', name: 'Widget', count: 42 };
+      installFetchMock(
+        new Response(JSON.stringify(rawPayload), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'header-req-id' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<{ id: string; name: string; count: number }>('/legacy-item');
+
+      expect(result.data).toEqual(rawPayload);
+      expect(result.meta.requestId).toBe('header-req-id');
+    });
+
+    it('returns raw array as data for ordinary non-envelope arrays', async () => {
+      const rawArray = ['alpha', 'beta', 'gamma'];
+      installFetchMock(
+        new Response(JSON.stringify(rawArray), {
+          status: 200,
+          headers: { 'content-type': 'application/json', 'x-request-id': 'header-array-id' },
+        })
+      );
+
+      const client = new NerdHubApiClient({ baseUrl: 'http://localhost:4000/api/v1' });
+      const result = await client.get<string[]>('/tags');
+
+      expect(result.data).toEqual(rawArray);
+      expect(result.meta.requestId).toBe('header-array-id');
+    });
+  });
 });

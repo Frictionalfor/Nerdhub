@@ -63,6 +63,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       );
     }
 
+    response.setHeader('x-request-id', requestId);
+
     response.status(status).json({
       error: {
         code,
