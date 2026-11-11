@@ -1,10 +1,10 @@
 # ADR 0008 — M1 Identity Session and Desktop Auth Architecture
 
-> **Status:** Proposed (NOT Accepted)
+> **Status:** Accepted (2026-11-10)
 > **Date:** 2026-11-09
 > **Milestone:** M1 — Identity and Onboarding
-> **Owner Decisions Unresolved:** M1-P-01, M1-P-02, M1-P-03, M1-P-04
-> **Notice:** Technical conditions are documented, but product decisions remain pending. Do not treat this proposal as accepted.
+> **Owner Decisions:** M1-P-01, M1-P-02, M1-P-03, M1-P-04 — ACCEPTED (2026-11-10)
+> **Notice:** All four product decisions were explicitly approved by the project owner on 2026-11-10. This ADR is accepted and authorizes commencement of Milestone M1 Phase 1 implementation.
 
 ---
 
@@ -61,6 +61,6 @@ Propose a dual-token session architecture combining short-lived signed JWT acces
 
 ## Status & Readiness
 
-- **Status:** **Proposed (Ready for Owner Acceptance)**
-- **Decisions Status:** Decisions M1-P-01 through M1-P-04 are formally APPROVED (2026-11-09). All architectural and security conditions (Redis fail-closed policy, encrypted refresh-token idempotency cache, deterministic 5-session eviction) are fully resolved.
-- **Next Step:** Owner acceptance of this ADR authorizes commencement of Milestone M1 Phase 1 implementation.
+- **Status:** **Accepted (2026-11-10)**
+- **Decisions Status:** Decisions M1-P-01 through M1-P-04 are **ACCEPTED** (2026-11-10). All architectural and security conditions (Redis fail-closed policy, encrypted refresh-token idempotency cache, deterministic 5-session eviction) are fully resolved.
+- **Next Step:** M1 Phase 1 implementation is authorized. Commence Milestone M1 Phase 1 implementation per `docs/engineering/identity/IMPLEMENTATION_PLAN.md`.

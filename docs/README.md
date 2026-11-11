@@ -1,7 +1,7 @@
 # NerdHub Documentation Index
 
 > **Master Navigation & Architecture Index**<br/>
-> **Current Status:** Milestone M0 APPROVED; Milestone M1 REMEDIATED (Implementation BLOCKED pending owner approval).
+> **Current Status:** Milestone M0 APPROVED; Milestone M1 REMEDIATED — Phase 1 AUTHORIZED / IN PROGRESS (owner-approved 2026-11-10).
 
 Welcome to the NerdHub documentation package. This repository maintains a strict documentation-first discipline. Before modifying code, read this guide and the referenced specifications.
 
@@ -22,14 +22,14 @@ For developers and autonomous coding agents (`Kilo`, `Antigravity`, `Codex`):
 
 ## 2. Product Documentation (`docs/product/`)
 
-| Document                                                                  | Purpose                                                           |           Status           |
-| :------------------------------------------------------------------------ | :---------------------------------------------------------------- | :------------------------: |
-| [MVP.md](product/MVP.md)                                                  | Minimum Viable Product definition and milestone boundaries        |        **APPROVED**        |
-| [PRODUCT_REQUIREMENTS.md](product/PRODUCT_REQUIREMENTS.md)                | Comprehensive functional and user journey requirements            |        **APPROVED**        |
-| **Identity & Onboarding Subsystem:**                                      |                                                                   |                            |
-| [PRODUCT_DECISIONS.md](product/identity/PRODUCT_DECISIONS.md)             | Canonical decision register (M1-P-01 through M1-P-04)             | **PENDING OWNER APPROVAL** |
-| [IDENTITY_REQUIREMENTS.md](product/identity/IDENTITY_REQUIREMENTS.md)     | Functional identity, auth, verification, and session requirements |        **PROPOSED**        |
-| [ONBOARDING_REQUIREMENTS.md](product/identity/ONBOARDING_REQUIREMENTS.md) | Onboarding state machine, handle policy, and interest setup       |        **PROPOSED**        |
+| Document                                                                  | Purpose                                                           |    Status    |
+| :------------------------------------------------------------------------ | :---------------------------------------------------------------- | :----------: |
+| [MVP.md](product/MVP.md)                                                  | Minimum Viable Product definition and milestone boundaries        | **APPROVED** |
+| [PRODUCT_REQUIREMENTS.md](product/PRODUCT_REQUIREMENTS.md)                | Comprehensive functional and user journey requirements            | **APPROVED** |
+| **Identity & Onboarding Subsystem:**                                      |                                                                   |              |
+| [PRODUCT_DECISIONS.md](product/identity/PRODUCT_DECISIONS.md)             | Canonical decision register (M1-P-01 through M1-P-04)             | **ACCEPTED** |
+| [IDENTITY_REQUIREMENTS.md](product/identity/IDENTITY_REQUIREMENTS.md)     | Functional identity, auth, verification, and session requirements | **PROPOSED** |
+| [ONBOARDING_REQUIREMENTS.md](product/identity/ONBOARDING_REQUIREMENTS.md) | Onboarding state machine, handle policy, and interest setup       | **PROPOSED** |
 
 ---
 
@@ -45,7 +45,7 @@ For developers and autonomous coding agents (`Kilo`, `Antigravity`, `Codex`):
 | [IDENTITY_ARCHITECTURE.md](architecture/identity/IDENTITY_ARCHITECTURE.md)                                     | Identity module, credential decoupling, and Argon2id bounds            |          **PROPOSED**          |
 | [SESSION_ARCHITECTURE.md](architecture/identity/SESSION_ARCHITECTURE.md)                                       | Dual-token model, single-flight refresh, and Redis version cache       |          **PROPOSED**          |
 | [DESKTOP_OAUTH.md](architecture/identity/DESKTOP_OAUTH.md)                                                     | `nerdhub://` URI scheme, PKCE completion code, and OS keychain         |          **PROPOSED**          |
-| [DATABASE_DESIGN.md](architecture/identity/DATABASE_DESIGN.md)                                                 | Proposed M1 Prisma models, constraints, and relational schema          |  **PROPOSED - NOT MIGRATED**   |
+| [DATABASE_DESIGN.md](architecture/identity/DATABASE_DESIGN.md)                                                 | M1 Prisma models, constraints, and relational schema                   |   **MIGRATION IN PROGRESS**    |
 | [API_DESIGN.md](architecture/identity/API_DESIGN.md)                                                           | Proposed OpenAPI 3.1 REST contracts for `/api/v1/auth/*` and `/me`     | **PROPOSED - NOT IMPLEMENTED** |
 | **Architecture Decision Records (ADRs):**                                                                      | [ADR Index](architecture/adr/README.md)                                |                                |
 | [ADR 0001: Modular Monolith](architecture/adr/0001-modular-monolith.md)                                        | Monolithic backend deployment topology                                 |          **Accepted**          |
@@ -55,7 +55,7 @@ For developers and autonomous coding agents (`Kilo`, `Antigravity`, `Codex`):
 | [ADR 0005: Redis & BullMQ](architecture/adr/0005-redis-bullmq.md)                                              | Cache and background queue selection                                   |          **Accepted**          |
 | [ADR 0006: Monorepo with pnpm & Turborepo](architecture/adr/0006-monorepo-pnpm-turborepo.md)                   | Monorepo task orchestration                                            |          **Accepted**          |
 | [ADR 0007: Tauri 2 + React Desktop](architecture/adr/0007-desktop-tauri-react.md)                              | Desktop shell selection                                                |          **Accepted**          |
-| [ADR 0008: M1 Identity & Desktop Auth](architecture/adr/0008-m1-identity-session-and-desktop-auth-proposal.md) | Session and desktop OAuth transport proposal                           |  **Proposed (NOT Accepted)**   |
+| [ADR 0008: M1 Identity & Desktop Auth](architecture/adr/0008-m1-identity-session-and-desktop-auth-proposal.md) | Session and desktop OAuth transport proposal                           |          **Accepted**          |
 
 ---
 

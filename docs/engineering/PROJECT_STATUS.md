@@ -25,11 +25,31 @@ The engineering foundation is implemented and remediated per the M0 audit. The f
 - [x] Least-privilege Tauri capabilities (dialog plugin permission and unused webview/window permissions removed)
 - [x] Local setup instructions documented below
 
-## Milestone M1 — remediated, BLOCKED pending owner acceptance
+## Milestone M1 — Phase 1 AUTHORIZED / IN PROGRESS
 
-M1 (Identity and onboarding) architecture has been remediated per the independent audits. All technical conditions from the first and second independent reviews are resolved, including the three final security conditions (Redis outage fail-closed policy, refresh-token idempotency authenticated encryption, five-session cap). The API client envelope parsing bug (MED-03) is fixed and verified.
+M1 (Identity and onboarding) product decisions were explicitly **ACCEPTED** by the project owner on 2026-11-10, and ADR 0008 was marked **Accepted** (2026-11-10), authorizing M1 Phase 1 implementation.
 
-M1 implementation remains **BLOCKED** until the project owner explicitly approves product decisions M1-P-01 through M1-P-04 and marks ADR 0008 Accepted. No M1 authentication endpoints, Prisma migrations, or application auth logic have been implemented. ADR 0008 is **Proposed, NOT Accepted**. All product decisions are **PENDING** owner approval (see `docs/product/identity/PRODUCT_DECISIONS.md`); none are treated as settled.
+The following pre-implementation conditions are satisfied:
+
+- [x] Product decisions M1-P-01 through M1-P-04 — ACCEPTED (2026-11-10)
+- [x] ADR 0008 — Accepted (2026-11-10)
+- [x] M1 final security conditions resolved (documented):
+  - Redis outage fail-closed for writes/sensitive operations; degraded read-only only on explicitly approved endpoints; max exposure 15 minutes; logging + monitoring; auto-recovery
+  - Refresh token idempotency response cache with authenticated encryption, dedicated ≥256-bit key (rotated every 90 days, never stored with ciphertext), 30-second TTL, exact same/different `Idempotency-Key` replay behavior
+  - Maximum five concurrent sessions; oldest evicted deterministically (`created_at`, `session_id` tie-break); transactional eviction+creation; user notified which session was signed out
+
+M1 Phase 1 implementation (Database Schema & Cryptographic Foundation per `IMPLEMENTATION_PLAN.md`) is complete and verified:
+
+- [x] Prisma identity models + migration `0002_m1_identity_foundation`
+- [x] `CryptoService` (Argon2id with bounded concurrency semaphore, 256-bit tokens, SHA-256 digests)
+- [x] Shared identity contracts/Zod schemas in `packages/contracts/src/identity/`
+- [x] Unit + integration tests for models, crypto, migrations (all passing)
+- [x] Format, lint, typecheck, test, build all green across all 7 packages
+- [x] `docs/engineering/audits/M1_PHASE_1_IMPLEMENTATION_REPORT.md` written
+
+M1 Phase 2 (Sessions & JWT) has **not** been started; implementation pauses here for engineering review.
+
+## Milestone M0 — complete
 
 - [x] **MED-03 standard API response envelope:** Implemented (`{ data, meta: { requestId } }`, `X-Request-Id` header, no double-wrapping) — unit + integration tested, runtime verified
 - [x] **API Client Envelope Fix:** Fixed null/false/0/"" handling in `NerdHubApiClient` (`client.ts:78`), verified with 6 new regression tests (14/14 tests passing)
@@ -39,32 +59,27 @@ M1 implementation remains **BLOCKED** until the project owner explicitly approve
   - Maximum five concurrent sessions; oldest evicted deterministically (`created_at`, `session_id` tie-break); transactional eviction+creation; user notified which session was signed out
 - [x] **M1 documentation finalized:**
   - `docs/architecture/identity/IDENTITY_ARCHITECTURE.md`, `SESSION_ARCHITECTURE.md`, `DESKTOP_OAUTH.md`, `DATABASE_DESIGN.md`, `API_DESIGN.md`
-  - `docs/product/identity/PRODUCT_DECISIONS.md`, `IDENTITY_REQUIREMENTS.md`, `ONBOARDING_REQUIREMENTS.md` (all decisions PENDING owner approval)
+  - `docs/product/identity/PRODUCT_DECISIONS.md`, `IDENTITY_REQUIREMENTS.md`, `ONBOARDING_REQUIREMENTS.md` (all decisions ACCEPTED 2026-11-10)
   - `docs/engineering/identity/SECURITY_REQUIREMENTS.md`, `THREAT_MODEL.md`, `ACCEPTANCE_CRITERIA.md`, `TESTING_STRATEGY.md`, `IMPLEMENTATION_PLAN.md`
-  - `docs/architecture/adr/0008-m1-identity-session-and-desktop-auth-proposal.md` (ADR 0008: Proposed, Ready for Owner Acceptance — NOT Accepted)
+  - `docs/architecture/adr/0008-m1-identity-session-and-desktop-auth-proposal.md` (ADR 0008: Accepted 2026-11-10)
   - `docs/engineering/audits/M1_FINAL_SECURITY_SIGNOFF.md` (final security signoff for Issues 1–3)
 - [x] **Audits & review reports preserved:**
   - `docs/engineering/audits/M1_INDEPENDENT_ARCHITECTURE_REVIEW.md` (First review — Rejected)
   - `docs/engineering/audits/M1_REMEDIATION_REPORT.md` (Kilo remediation report)
   - `docs/engineering/audits/M1_SECOND_INDEPENDENT_REVIEW.md` (Second review — Remediation Approved)
   - `docs/engineering/audits/M1_PRE_IMPLEMENTATION_GATE_REPORT.md` (Pre-implementation gate report)
-- [ ] Owner approves product decisions M1-P-01 through M1-P-04
-- [ ] Owner marks ADR 0008 Accepted
-- [ ] Owner authorizes commencement of M1 Phase 1 implementation
 
 ## Known limitations
 
 - Tauri native compilation/release cannot be verified in this environment (no Rust toolchain).
 - CI workflow has not been executed against GitHub Actions (no runner access); validated as syntactically correct YAML only.
-- M1 cannot be implemented or approved until owner decisions M1-P-01..M1-P-04 are resolved and ADR 0008 is Accepted.
-- M1 tests (refresh rotation, session eviction, Redis-outage fail-closed) are specified in `TESTING_STRATEGY.md` §2.4 but cannot be run until M1 authentication is implemented.
+- M1 Phase 1 implementation is in progress; tests for refresh rotation, session eviction, and Redis-outage fail-closed behavior are specified in `TESTING_STRATEGY.md` §2.4 but cannot be run until M1 authentication is implemented.
 
 ## Next work
 
-1. Select source/documentation license before making the repository public (docs/engineering/LICENSE_DECISION.md).
-2. Owner reviews and approves M1-P-01 through M1-P-04 product decisions.
-3. Owner marks ADR 0008 Accepted.
-4. Execute CI against a GitHub Actions runner with Node 26 + Docker.
-5. Begin M1 implementation only after owner authorization.
+1. Complete M1 Phase 1 implementation (identity models, migration, CryptoService, contracts, tests).
+2. Select source/documentation license before making the repository public (docs/engineering/LICENSE_DECISION.md).
+3. Execute CI against a GitHub Actions runner with Node 26 + Docker.
+4. Begin M1 Phase 2 (Sessions & JWT) after Phase 1 engineering review.
 
 Update this file when milestone status changes. Do not mark work complete based only on generated code; require tests and review.
